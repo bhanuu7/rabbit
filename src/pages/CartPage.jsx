@@ -127,6 +127,8 @@ function CartPage() {
     const items = Object.values(cartProducts).map((item) => ({
       productId: item.product.id,
       quantity: item.quantity,
+      price: item.product.price,
+      name: item.product.item_name,
     }));
     mutate({
       user_name: username,

@@ -31,6 +31,7 @@ export default function Header() {
     toast.success("Logged out successfully", {
       position: "top-center",
     });
+    localStorage.clear();
     navigate("/");
   };
 

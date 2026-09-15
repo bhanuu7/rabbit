@@ -24,7 +24,7 @@ Amplify.configure({
       userPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
       userPoolClientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
       region: import.meta.env.VITE_COGNITO_REGION,
-      identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID,
+      //identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID,
     },
   },
   Storage: {

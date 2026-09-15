@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { products as initialProducts } from "@/utils";
-
+import axios from "axios";
 const StoreContext = createContext(undefined);
 
 export function StoreProvider({ children }) {
@@ -94,6 +94,13 @@ export function StoreProvider({ children }) {
       ...product,
       id: Date.now().toString(),
     };
+    axios.post(`${import.meta.env.VITE_BASE_URL}/add`, {
+      item_name: product.name,
+      stock_count: product.stock,
+      price: product.price,
+      category: product.category,
+      image_url: product.image_url,
+    });
     setProducts((prev) => [...prev, newProduct]);
   };
 

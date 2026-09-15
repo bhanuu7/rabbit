@@ -38,6 +38,7 @@ export default function AppSidebar() {
   const location = useLocation();
   const handleLogout = async () => {
     await signOut();
+    localStorage.clear();
     toast.success("Logged out successfully", { position: "top-center" });
     navigate("/");
   };

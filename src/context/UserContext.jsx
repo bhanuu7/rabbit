@@ -7,31 +7,25 @@ export const UserContext = createContext({});
 export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState();
   const [role, setRole] = useState();
-
-  async function fetchRole() {
-    // Add this to see the raw error details
-    try {
-      // const session = await fetchAuthSession();
-      // console.log(session);
-    } catch (error) {
-      console.log("Error Name:", error.name);
-      console.log("Error Message:", error.message);
-      // Check if the underlying cause shows a region mismatch
-    }
-    if (groups && groups.includes("Admin")) {
-      setRole("Admin");
-    } else {
-      setRole("user");
-    }
-  }
   async function fetchUser() {
-    const user = await getCurrentUser();
-    const userData = user.signInDetails.loginId.split("@")[0];
-    setUsername(userData);
+    try {
+      const session = await fetchAuthSession();
+      if (!session.tokens) {
+        console.log("No active session");
+        return;
+      }
+      const user = await getCurrentUser();
+      const userData = user.signInDetails.loginId.split("@")[0];
+      const userRole =
+        session.tokens.accessToken.payload.scope.split("user.")[1];
+      setUsername(userData);
+      setRole(userRole);
+    } catch (err) {
+      console.error("fetchUser error:", err);
+    }
   }
   useEffect(() => {
     fetchUser();
-    // fetchRole();
   }, []);
 
   return (
