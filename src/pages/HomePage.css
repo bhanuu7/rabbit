@@ -2,22 +2,39 @@
    RABBIT LIQUOR — Premium Dark Theme with Gold Highlights
    ================================================================ */
 
+@font-face {
+  font-family: 'Autumn Brush';
+  src: url('/fonts/AutumnBrush.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Rustic Roadway';
+  src: url('/fonts/RusticRoadway.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ================================================================
    GLOBAL TOKENS & TYPOGRAPHY
    ================================================================ */
 
 .rl-app {
-  --gold:        #c9a84c;
-  --gold-light:  #f0d080;
-  --gold-dark:   #8b6914;
-  --bg-base:     #080808;
-  --bg-card:     #111111;
-  --bg-card2:    #161616;
-  --border:      rgba(201, 168, 76, 0.18);
-  --border-hover:rgba(201, 168, 76, 0.5);
-  --text:        #e5e5e5;
-  --text-muted:  #888888;
-  --text-dim:    #555555;
+  /* Palette derived from the watercolor artwork:
+     warm paper cream, coral sun/wine, muted slate mountains, ink outline */
+  --gold:        #c25a3a;   /* primary coral accent (was gold) */
+  --gold-light:  #d97a5c;
+  --gold-dark:   #a8461f;
+  --bg-base:     #f3ebda;   /* warm paper */
+  --bg-card:     #fbf5ea;   /* lighter card surface */
+  --bg-card2:    #f6eedf;
+  --border:      rgba(45, 51, 58, 0.14);
+  --border-hover:rgba(194, 90, 58, 0.45);
+  --text:        #3a424b;   /* ink body */
+  --text-muted:  #6b7681;   /* slate mountain */
+  --text-dim:    #8a94a0;
   --font-serif:  'Georgia', 'Times New Roman', serif;
   --font-sans:   'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
   --radius:      6px;
@@ -31,6 +48,76 @@
 }
 
 .rl-gold { color: var(--gold); font-style: italic; }
+
+/* ================================================================
+   LIGHT WATERCOLOR THEME — HOME HERO OVERRIDES
+   ================================================================ */
+.rl-app .rl-hero {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(243, 235, 218, 0.94) 0%,
+      rgba(243, 235, 218, 0.62) 40%,
+      rgba(243, 235, 218, 0.2) 66%,
+      rgba(243, 235, 218, 0) 100%
+    ),
+    url('/hero-bg.png') center / cover no-repeat;
+  border-bottom: 1px solid var(--border);
+}
+.rl-app .rl-hero__title {
+  color: #2d333a;
+  font-family: 'Autumn Brush', var(--font-serif);
+  font-size: clamp(46px, 6.4vw, 88px);
+  line-height: 1.05;
+}
+.rl-app .rl-hero__desc {
+  color: #5c6670;
+  font-family: 'Rustic Roadway', var(--font-sans);
+  font-size: clamp(17px, 1.7vw, 22px);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+/* Ink-wash watercolor footer background (reuses hero art, deeply tinted) */
+.rl-footer-ink {
+  background-color: #2a2640;
+  background-image:
+    linear-gradient(180deg, rgba(38, 34, 58, 0.9) 0%, rgba(34, 30, 52, 0.95) 100%),
+    url('/hero-bg.png');
+  background-size: cover;
+  background-position: center 30%;
+  background-blend-mode: multiply, normal;
+}
+.rl-app .rl-hero__pill {
+  background: rgba(209, 112, 79, 0.1);
+  border-color: rgba(209, 112, 79, 0.35);
+  color: #c25a3a;
+}
+.rl-app .rl-hero__pill-dot { background: #d1704f; }
+.rl-app .rl-btn--gold { color: #fff; }
+.rl-app .rl-stat__num { color: #c25a3a; }
+.rl-app .rl-stat__label { color: #8a94a0; }
+.rl-app .rl-stat__divider { background: rgba(45, 51, 58, 0.18); }
+.rl-app .rl-gold { color: #c25a3a; }
+
+/* Global `h1, h2` rule (unlayered) beats Tailwind's layered text utilities,
+   so scope the section-heading ink colour here to win the cascade. */
+.rl-app #range h2,
+.rl-app #trending h2,
+.rl-app #reviews h2 { color: #2d333a; }
+
+@media (max-width: 768px) {
+  .rl-app .rl-hero { align-items: flex-end; }
+  .rl-app .rl-hero__content {
+    background: linear-gradient(
+      to top,
+      rgba(243, 235, 218, 1) 46%,
+      rgba(243, 235, 218, 0.92) 66%,
+      rgba(243, 235, 218, 0.7) 82%,
+      rgba(243, 235, 218, 0) 100%
+    );
+  }
+}
 
 /* ================================================================
    BUTTONS

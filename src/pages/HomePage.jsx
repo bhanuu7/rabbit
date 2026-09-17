@@ -16,16 +16,16 @@ import { reserveProduct } from "@/api/reserveProduct";
 import { useInventorySocket } from "@/hooks/useInventerySocket";
 import { useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import designerImg from "../assets/Designer2.png";
 import BottleSVG, { CATEGORY_FALLBACK } from "@/components/BottleSVG";
+import siteLogo from "@/assets/Site_Logo.png";
 import { products as REAL_PRODUCTS } from "@/utils";
 
 /* ================================================================
    SVG GLASS COMPONENTS
    ================================================================ */
 
-const G = "#c9a84c";
-const GL = "#f0d080";
+const G = "#c25a3a";
+const GL = "#d97a5c";
 
 function WineGlass({ active }) {
   const c = active ? GL : G;
@@ -546,7 +546,7 @@ const CATEGORIES = [
     name: "Wine",
     Glass: WineGlass,
     accent: "#c0364a",
-    bg: "rgba(110,15,25,0.6)",
+    bg: "rgba(192,54,74,0.18)",
     desc: "Reds, whites & rosés",
     count: "120+",
   },
@@ -554,7 +554,7 @@ const CATEGORIES = [
     name: "Whiskey",
     Glass: WhiskeyGlass,
     accent: "#c9a84c",
-    bg: "rgba(80,55,0,0.6)",
+    bg: "rgba(201,168,76,0.2)",
     desc: "Single malt & blended",
     count: "90+",
   },
@@ -562,7 +562,7 @@ const CATEGORIES = [
     name: "Beer",
     Glass: BeerGlass,
     accent: "#f5a623",
-    bg: "rgba(80,50,0,0.6)",
+    bg: "rgba(245,166,35,0.2)",
     desc: "Craft & premium ales",
     count: "60+",
   },
@@ -570,7 +570,7 @@ const CATEGORIES = [
     name: "Rum",
     Glass: RumGlass,
     accent: "#b85c2a",
-    bg: "rgba(70,22,0,0.6)",
+    bg: "rgba(184,92,42,0.2)",
     desc: "Dark, white & spiced",
     count: "45+",
   },
@@ -578,7 +578,7 @@ const CATEGORIES = [
     name: "Vodka",
     Glass: VodkaGlass,
     accent: "#8ab8d8",
-    bg: "rgba(10,30,68,0.6)",
+    bg: "rgba(138,184,216,0.28)",
     desc: "Premium & flavoured",
     count: "50+",
   },
@@ -586,7 +586,7 @@ const CATEGORIES = [
     name: "Tequila",
     Glass: TequilaGlass,
     accent: "#7ec850",
-    bg: "rgba(18,52,8,0.6)",
+    bg: "rgba(126,200,80,0.22)",
     desc: "Blanco, reposado & añejo",
     count: "35+",
   },
@@ -594,7 +594,7 @@ const CATEGORIES = [
     name: "Champagne",
     Glass: ChampagneGlass,
     accent: "#d4b84a",
-    bg: "rgba(70,55,0,0.6)",
+    bg: "rgba(212,184,74,0.22)",
     desc: "Brut, rosé & vintage",
     count: "28+",
   },
@@ -602,7 +602,7 @@ const CATEGORIES = [
     name: "Gin",
     Glass: GinGlass,
     accent: "#5ca8c8",
-    bg: "rgba(8,34,56,0.6)",
+    bg: "rgba(92,168,200,0.26)",
     desc: "London dry & botanical",
     count: "55+",
   },
@@ -610,7 +610,7 @@ const CATEGORIES = [
     name: "Cognac",
     Glass: CognacGlass,
     accent: "#c47022",
-    bg: "rgba(62,28,0,0.6)",
+    bg: "rgba(196,112,34,0.2)",
     desc: "VS, VSOP & XO",
     count: "30+",
   },
@@ -618,7 +618,7 @@ const CATEGORIES = [
     name: "Scotch",
     Glass: ScotchGlass,
     accent: "#c8a87c",
-    bg: "rgba(52,40,14,0.6)",
+    bg: "rgba(200,168,124,0.24)",
     desc: "Highland, Speyside & Islay",
     count: "70+",
   },
@@ -670,19 +670,7 @@ function HeroSection() {
 
   return (
     <section className="rl-hero" id="home">
-      <div className="rl-hero-splash-wrap" aria-hidden="true">
-        <img
-          src={designerImg}
-          alt="Premium Whiskey Splash"
-          className="rl-hero-splash-img"
-        />
-      </div>
-
       <div className="rl-hero__content">
-        <div className="rl-hero__pill">
-          <span className="rl-hero__pill-dot" />
-          <span>500+ Premium Labels In Stock</span>
-        </div>
         <h1 className="rl-hero__title">
           The Finest
           <br />
@@ -864,24 +852,24 @@ function RangeSection() {
 
   return (
     <section
-      className="py-[88px] pb-20 bg-[linear-gradient(180deg,#080808_0%,#0f0d07_60%,#080808_100%)] relative overflow-hidden before:content-[''] before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-[70%] before:h-px before:bg-gradient-to-r before:from-transparent before:via-gold before:to-transparent before:opacity-35"
+      className="py-[88px] pb-20 bg-[linear-gradient(180deg,#f3ebda_0%,#ece1cd_60%,#f3ebda_100%)] relative overflow-hidden before:content-[''] before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-[70%] before:h-px before:bg-gradient-to-r before:from-transparent before:via-[#d1704f] before:to-transparent before:opacity-50"
       id="range"
     >
       <div className="text-center mb-[52px] px-6">
-        <p className="text-gold text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
+        <p className="text-[#c25a3a] text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
           DISCOVER
         </p>
-        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-white font-serif-app mb-2.5">
-          Our <span className="text-gold italic">Range</span>
+        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-[#2d333a] font-serif-app mb-2.5">
+          Our <span className="text-[#c25a3a] italic">Range</span>
         </h2>
-        <p className="text-sm text-text-dim">
+        <p className="text-sm text-[#8a94a0]">
           Ten magnificent categories — scroll to explore
         </p>
       </div>
 
       <div className="relative px-[68px] max-lg:px-14 max-md:px-[46px] max-[480px]:px-[38px]">
         <button
-          className={`absolute top-1/2 left-[10px] -translate-y-[55%] z-10 bg-[rgba(6,6,6,0.92)] border border-[rgba(201,168,76,0.42)] text-gold w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(201,168,76,0.1)] hover:border-gold hover:shadow-[0_0_18px_rgba(201,168,76,0.22)] ${!canLeft ? "opacity-0 pointer-events-none" : ""}`}
+          className={`absolute top-1/2 left-[10px] -translate-y-[55%] z-10 bg-[rgba(251,245,234,0.92)] border border-[rgba(194,90,58,0.35)] text-[#c25a3a] w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(209,112,79,0.1)] hover:border-[#d1704f] hover:shadow-[0_0_18px_rgba(209,112,79,0.22)] ${!canLeft ? "opacity-0 pointer-events-none" : ""}`}
           onClick={() => scrollBy(-1)}
           aria-label="Scroll left"
         >
@@ -906,7 +894,7 @@ function RangeSection() {
           {CATEGORIES.map((cat, i) => (
             <button
               key={cat.name}
-              className={`group flex-[0_0_178px] relative flex flex-col items-center gap-2.5 py-7 px-4 bg-bg-card border border-[rgba(201,168,76,0.18)] rounded-[18px] cursor-pointer overflow-hidden transition-all duration-[320ms] font-sans-app text-center hover:border-[var(--cat-accent,#c9a84c)] hover:shadow-[0_0_28px_-4px_var(--cat-glow,rgba(201,168,76,0.25))] hover:-translate-y-1.5 hover:bg-[#141414] max-md:flex-[0_0_155px] max-md:py-5 max-md:px-2.5 max-md:rounded-[14px] max-[480px]:flex-[0_0_140px] max-[480px]:py-4 max-[480px]:px-2 ${active === i ? "border-[var(--cat-accent,#c9a84c)] shadow-[0_0_40px_-4px_var(--cat-glow,rgba(201,168,76,0.3))] -translate-y-1.5 bg-[#141414]" : ""}`}
+              className={`group flex-[0_0_178px] relative flex flex-col items-center gap-2.5 py-7 px-4 bg-[#fbf5ea] border border-[rgba(45,51,58,0.12)] rounded-[18px] cursor-pointer overflow-hidden transition-all duration-[320ms] font-sans-app text-center hover:border-[var(--cat-accent,#d1704f)] hover:shadow-[0_0_28px_-4px_var(--cat-glow,rgba(209,112,79,0.25))] hover:-translate-y-1.5 hover:bg-[#f6eedf] max-md:flex-[0_0_155px] max-md:py-5 max-md:px-2.5 max-md:rounded-[14px] max-[480px]:flex-[0_0_140px] max-[480px]:py-4 max-[480px]:px-2 ${active === i ? "border-[var(--cat-accent,#d1704f)] shadow-[0_0_40px_-4px_var(--cat-glow,rgba(209,112,79,0.3))] -translate-y-1.5 bg-[#f6eedf]" : ""}`}
               style={{
                 "--cat-accent": cat.accent,
                 "--cat-bg": cat.bg,
@@ -917,22 +905,22 @@ function RangeSection() {
               }
               aria-pressed={active === i}
             >
-              <div className="absolute top-0 -left-3/4 w-1/2 h-full bg-[linear-gradient(105deg,transparent_40%,rgba(255,255,255,0.04)_50%,transparent_60%)] transition-[left] duration-[550ms] pointer-events-none group-hover:left-[135%]" />
+              <div className="absolute top-0 -left-3/4 w-1/2 h-full bg-[linear-gradient(105deg,transparent_40%,rgba(45,51,58,0.05)_50%,transparent_60%)] transition-[left] duration-[550ms] pointer-events-none group-hover:left-[135%]" />
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center_bottom,var(--cat-bg,rgba(30,20,0,0.5))_0%,transparent_70%)] opacity-0 transition-opacity duration-[350ms] pointer-events-none group-hover:opacity-100" />
               <div className="w-16 h-[108px] relative z-[1] shrink-0 max-md:w-[52px] max-md:h-[88px] max-[480px]:w-[42px] max-[480px]:h-[72px]">
                 <cat.Glass active={active === i} />
               </div>
-              <span className="absolute top-3 right-3 text-[9px] text-[var(--cat-accent,#c9a84c)] bg-[rgba(0,0,0,0.4)] border border-[var(--cat-accent,#c9a84c)] rounded-full py-0.5 px-2 tracking-[0.5px] z-[2] opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+              <span className="absolute top-3 right-3 text-[9px] text-[var(--cat-accent,#d1704f)] bg-[rgba(251,245,234,0.85)] border border-[var(--cat-accent,#d1704f)] rounded-full py-0.5 px-2 tracking-[0.5px] z-[2] opacity-0 -translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
                 {cat.count}
               </span>
-              <span className="text-[13px] font-bold text-white tracking-[1.4px] uppercase z-[1] transition-colors duration-300 group-hover:text-[var(--cat-accent,#c9a84c)]">
+              <span className="text-[13px] font-bold text-[#2d333a] tracking-[1.4px] uppercase z-[1] transition-colors duration-300 group-hover:text-[var(--cat-accent,#d1704f)]">
                 {cat.name}
               </span>
-              <span className="text-[10px] text-text-dim leading-[1.45] z-[1] opacity-0 translate-y-1 transition-all duration-300 delay-[50ms] group-hover:opacity-100 group-hover:translate-y-0">
+              <span className="text-[10px] text-[#8a94a0] leading-[1.45] z-[1] opacity-0 translate-y-1 transition-all duration-300 delay-[50ms] group-hover:opacity-100 group-hover:translate-y-0">
                 {cat.desc}
               </span>
               {active === i && (
-                <span className="inline-flex items-center gap-[5px] text-[10px] text-[var(--cat-accent,#c9a84c)] tracking-[0.8px] uppercase z-[1] animate-rl-fadein">
+                <span className="inline-flex items-center gap-[5px] text-[10px] text-[var(--cat-accent,#d1704f)] tracking-[0.8px] uppercase z-[1] animate-rl-fadein">
                   <svg
                     viewBox="0 0 16 16"
                     fill="none"
@@ -953,7 +941,7 @@ function RangeSection() {
         </div>
 
         <button
-          className={`absolute top-1/2 right-[10px] -translate-y-[55%] z-10 bg-[rgba(6,6,6,0.92)] border border-[rgba(201,168,76,0.42)] text-gold w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(201,168,76,0.1)] hover:border-gold hover:shadow-[0_0_18px_rgba(201,168,76,0.22)] ${!canRight ? "opacity-0 pointer-events-none" : ""}`}
+          className={`absolute top-1/2 right-[10px] -translate-y-[55%] z-10 bg-[rgba(251,245,234,0.92)] border border-[rgba(194,90,58,0.35)] text-[#c25a3a] w-12 h-12 rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(209,112,79,0.1)] hover:border-[#d1704f] hover:shadow-[0_0_18px_rgba(209,112,79,0.22)] ${!canRight ? "opacity-0 pointer-events-none" : ""}`}
           onClick={() => scrollBy(1)}
           aria-label="Scroll right"
         >
@@ -986,9 +974,9 @@ function TrendingCard({ product }) {
   const count = getProductCount ? getProductCount(product.id) : 0;
 
   return (
-    <div className="group flex-[0_0_215px] bg-bg-card border border-[rgba(201,168,76,0.18)] rounded-xl overflow-hidden transition-all duration-[280ms] cursor-pointer hover:border-[rgba(201,168,76,0.5)] hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(201,168,76,0.1)] max-[480px]:flex-[0_0_180px]">
-      <div className="relative h-[210px] bg-gradient-to-br from-[#131313] to-[#0d0d0d] flex items-center justify-center">
-        <span className="absolute top-3 left-3 bg-[rgba(201,168,76,0.12)] border border-[rgba(201,168,76,0.3)] text-gold text-[9px] tracking-[1.5px] py-[3px] px-2.5 rounded-full uppercase">
+    <div className="group flex-[0_0_215px] bg-[#fbf5ea] border border-[rgba(45,51,58,0.12)] rounded-xl overflow-hidden transition-all duration-[280ms] cursor-pointer hover:border-[rgba(209,112,79,0.5)] hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(209,112,79,0.12)] max-[480px]:flex-[0_0_180px]">
+      <div className="relative h-[210px] bg-gradient-to-br from-[#f6eedf] to-[#ece1cd] flex items-center justify-center">
+        <span className="absolute top-3 left-3 bg-[rgba(209,112,79,0.12)] border border-[rgba(209,112,79,0.3)] text-[#c25a3a] text-[9px] tracking-[1.5px] py-[3px] px-2.5 rounded-full uppercase">
           {product.category}
         </span>
         {!imgError && product.image_url ? (
@@ -1007,42 +995,42 @@ function TrendingCard({ product }) {
         )}
       </div>
       <div className="p-4">
-        <h3 className="text-sm font-semibold text-white font-serif-app leading-[1.3] mb-[5px]">
+        <h3 className="text-sm font-semibold text-[#2d333a] font-serif-app leading-[1.3] mb-[5px]">
           {product.item_name}
         </h3>
-        <p className="text-[11px] text-text-dim mb-[9px]">
+        <p className="text-[11px] text-[#8a94a0] mb-[9px]">
           {product.origin} · {product.category}
         </p>
-        <div className="text-gold text-xs flex items-center gap-[5px] mb-[13px]">
+        <div className="text-[#c25a3a] text-xs flex items-center gap-[5px] mb-[13px]">
           {"★★★★★"}
-          <span className="text-[11px] text-[#888]">
+          <span className="text-[11px] text-[#6b7681]">
             {product.rating || 4.8}
           </span>
         </div>
         <div className="flex items-center justify-between">
-          <span className="text-[19px] font-bold text-gold font-serif-app">
+          <span className="text-[19px] font-bold text-[#c25a3a] font-serif-app">
             ${Number(product.price).toFixed(2)}
           </span>
           {count === 0 ? (
             <button
-              className="bg-transparent border border-gold text-gold py-[5px] px-3 rounded-md text-[11px] cursor-pointer transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(201,168,76,0.12)]"
+              className="bg-transparent border border-[#d1704f] text-[#c25a3a] py-[5px] px-3 rounded-md text-[11px] cursor-pointer transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(209,112,79,0.12)]"
               onClick={() => addToCart?.(product)}
             >
               + Add
             </button>
           ) : (
-            <div className="flex items-center gap-1 border border-[rgba(201,168,76,0.4)] rounded-md overflow-hidden">
+            <div className="flex items-center gap-1 border border-[rgba(209,112,79,0.4)] rounded-md overflow-hidden">
               <button
-                className="bg-transparent border-none text-gold w-[26px] h-[26px] text-[15px] cursor-pointer flex items-center justify-center transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(201,168,76,0.12)]"
+                className="bg-transparent border-none text-[#c25a3a] w-[26px] h-[26px] text-[15px] cursor-pointer flex items-center justify-center transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(209,112,79,0.12)]"
                 onClick={() => removeFromCart?.(product)}
               >
                 −
               </button>
-              <span className="min-w-[20px] text-center text-xs font-semibold text-gold">
+              <span className="min-w-[20px] text-center text-xs font-semibold text-[#c25a3a]">
                 {count}
               </span>
               <button
-                className="bg-transparent border-none text-gold w-[26px] h-[26px] text-[15px] cursor-pointer flex items-center justify-center transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(201,168,76,0.12)]"
+                className="bg-transparent border-none text-[#c25a3a] w-[26px] h-[26px] text-[15px] cursor-pointer flex items-center justify-center transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(209,112,79,0.12)]"
                 onClick={() => addToCart?.(product)}
               >
                 +
@@ -1076,24 +1064,24 @@ function TrendingSection({ data }) {
 
   return (
     <section
-      className="py-[100px] bg-bg-base relative before:content-[''] before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-[70%] before:h-px before:bg-gradient-to-r before:from-transparent before:via-gold before:to-transparent before:opacity-30"
+      className="py-[100px] bg-[#f3ebda] relative before:content-[''] before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-[70%] before:h-px before:bg-gradient-to-r before:from-transparent before:via-[#d1704f] before:to-transparent before:opacity-40"
       id="trending"
     >
       <div className="text-center mb-[52px] px-6">
-        <p className="text-gold text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
+        <p className="text-[#c25a3a] text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
           FEATURED
         </p>
-        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-white font-serif-app mb-2.5">
-          Trending <span className="text-gold italic">Products</span>
+        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-[#2d333a] font-serif-app mb-2.5">
+          Trending <span className="text-[#c25a3a] italic">Products</span>
         </h2>
-        <p className="text-sm text-text-dim">
+        <p className="text-sm text-[#8a94a0]">
           Our most sought-after spirits this season
         </p>
       </div>
       <div className="relative px-12 max-lg:px-5 max-[480px]:px-3.5">
         {canLeft && (
           <button
-            className="absolute top-1/2 left-[2px] -translate-y-[60%] z-10 bg-[rgba(6,6,6,0.92)] border border-[rgba(201,168,76,0.38)] text-gold w-[42px] h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(201,168,76,0.1)] hover:border-gold"
+            className="absolute top-1/2 left-[2px] -translate-y-[60%] z-10 bg-[rgba(251,245,234,0.92)] border border-[rgba(194,90,58,0.35)] text-[#c25a3a] w-[42px] h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(209,112,79,0.1)] hover:border-[#d1704f]"
             onClick={() => scroll(-1)}
             aria-label="Scroll left"
           >
@@ -1124,7 +1112,7 @@ function TrendingSection({ data }) {
         </div>
         {canRight && (
           <button
-            className="absolute top-1/2 right-[2px] -translate-y-[60%] z-10 bg-[rgba(6,6,6,0.92)] border border-[rgba(201,168,76,0.38)] text-gold w-[42px] h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(201,168,76,0.1)] hover:border-gold"
+            className="absolute top-1/2 right-[2px] -translate-y-[60%] z-10 bg-[rgba(251,245,234,0.92)] border border-[rgba(194,90,58,0.35)] text-[#c25a3a] w-[42px] h-[42px] rounded-full flex items-center justify-center cursor-pointer transition-all duration-[280ms] hover:bg-[rgba(209,112,79,0.1)] hover:border-[#d1704f]"
             onClick={() => scroll(1)}
             aria-label="Scroll right"
           >
@@ -1153,34 +1141,34 @@ function TrendingSection({ data }) {
 function ReviewsSection() {
   return (
     <section
-      className="py-[100px] px-16 bg-[linear-gradient(180deg,#080808,#0e0b05,#080808)] border-t border-[rgba(201,168,76,0.18)] max-lg:py-20 max-lg:px-8 max-md:py-16 max-md:px-[22px]"
+      className="py-[100px] px-16 bg-[linear-gradient(180deg,#f3ebda,#ece1cd,#f3ebda)] border-t border-[rgba(45,51,58,0.12)] max-lg:py-20 max-lg:px-8 max-md:py-16 max-md:px-[22px]"
       id="reviews"
     >
       <div className="text-center mb-[52px] px-6">
-        <p className="text-gold text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
+        <p className="text-[#c25a3a] text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
           TESTIMONIALS
         </p>
-        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-white font-serif-app mb-2.5">
-          What Our <span className="text-gold italic">Connoisseurs</span> Say
+        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-[#2d333a] font-serif-app mb-2.5">
+          What Our <span className="text-[#c25a3a] italic">Connoisseurs</span> Say
         </h2>
       </div>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-[22px] max-w-[1200px] mx-auto max-md:grid-cols-1">
         {REVIEWS.map((r) => (
           <div
             key={r.id}
-            className="bg-bg-card border border-[rgba(201,168,76,0.18)] rounded-xl py-[34px] px-[30px] relative transition-all duration-[280ms] hover:border-[rgba(201,168,76,0.38)] hover:-translate-y-[5px] hover:shadow-[0_14px_36px_rgba(201,168,76,0.07)] before:content-['\u201c'] before:absolute before:top-3 before:right-[22px] before:text-[88px] before:text-[rgba(201,168,76,0.07)] before:font-serif-app before:leading-none before:pointer-events-none"
+            className="bg-[#fbf5ea] border border-[rgba(45,51,58,0.12)] rounded-xl py-[34px] px-[30px] relative transition-all duration-[280ms] hover:border-[rgba(209,112,79,0.38)] hover:-translate-y-[5px] hover:shadow-[0_14px_36px_rgba(209,112,79,0.1)] before:content-['\u201c'] before:absolute before:top-3 before:right-[22px] before:text-[88px] before:text-[rgba(209,112,79,0.12)] before:font-serif-app before:leading-none before:pointer-events-none"
           >
-            <div className="text-gold text-[15px] tracking-[2px] mb-4">
+            <div className="text-[#c25a3a] text-[15px] tracking-[2px] mb-4">
               {"★".repeat(r.rating)}
             </div>
-            <p className="text-sm text-[#888] leading-[1.85] font-serif-app italic mb-[22px]">
+            <p className="text-sm text-[#5c6670] leading-[1.85] font-serif-app italic mb-[22px]">
               "{r.text}"
             </p>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-gold to-gold-dark text-black font-bold text-base flex items-center justify-center shrink-0">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#d1704f] to-[#b8542f] text-white font-bold text-base flex items-center justify-center shrink-0">
                 {r.avatar}
               </div>
-              <span className="text-[13px] font-semibold text-[#ccc]">
+              <span className="text-[13px] font-semibold text-[#2d333a]">
                 {r.name}
               </span>
             </div>
@@ -1410,6 +1398,160 @@ function Footer({ onNavigate }) {
 }
 
 /* ================================================================
+   SITE FOOTER — Ink-wash watercolor footer
+   ================================================================ */
+
+const FOOTER_COLS = [
+  {
+    title: "Shop",
+    links: ["Whiskey", "Wine", "Vodka", "Gin", "Rum", "Tequila"],
+  },
+  {
+    title: "Company",
+    links: ["About Us", "Journal"],
+  },
+  {
+    title: "Help",
+    links: ["FAQ", "Contact Us"],
+  },
+];
+
+const FOOTER_ROUTES = { FAQ: "/faq", "Contact Us": "/contact" };
+
+function SiteFooter() {
+  const navigate = useNavigate();
+  return (
+    <footer
+      className="rl-footer-ink relative text-[rgba(245,240,232,0.62)] font-sans-app"
+      id="about"
+    >
+      <div className="relative z-[1] max-w-[1400px] mx-auto px-16 pt-9 pb-6 max-lg:px-8 max-md:px-6">
+        {/* Top: brand + link columns */}
+        <div className="flex justify-between gap-12 max-lg:gap-8 max-md:flex-col max-md:gap-7">
+          {/* Brand */}
+          <div className="max-w-[300px]">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-11 h-11 rounded-full bg-[#f5efe2] flex items-center justify-center shrink-0 shadow-[0_4px_14px_rgba(0,0,0,0.3)]">
+                <img
+                  src={siteLogo}
+                  alt="Rabbit Liquor"
+                  className="w-7 h-7 object-contain"
+                />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="text-[19px] font-bold text-[#f5f0e8] font-serif-app tracking-[0.4px]">
+                  The Rabbit
+                </span>
+                <span className="text-[9px] text-[#e0906f] tracking-[3px] uppercase mt-1">
+                  Liquor Co.
+                </span>
+              </div>
+            </div>
+            <p className="text-[12.5px] leading-[1.7] mb-4 max-w-[270px]">
+              Premium spirits, wines &amp; craft beers. Curated with rare taste
+              and delivered with care.
+            </p>
+            <div className="flex gap-2">
+              {["IG", "TW", "FB"].map((s) => (
+                <a
+                  key={s}
+                  href="#"
+                  aria-label={s}
+                  className="flex items-center justify-center w-9 h-9 rounded-lg border border-[rgba(245,240,232,0.18)] text-[10px] font-semibold tracking-[0.5px] text-[rgba(245,240,232,0.72)] no-underline transition-all duration-[280ms] hover:border-[#d97a5c] hover:text-[#e0906f] hover:bg-[rgba(217,122,92,0.08)]"
+                >
+                  {s}
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Link columns */}
+          <div className="flex gap-16 max-lg:gap-10 max-md:gap-10 max-md:flex-wrap">
+            {FOOTER_COLS.map((col) => (
+              <div key={col.title} className="flex flex-col">
+                <h4 className="text-[15px] text-[#e0906f] font-serif-app italic mb-3">
+                  {col.title}
+                </h4>
+                <ul className="list-none m-0 p-0 flex flex-col gap-2.5">
+                  {col.links.map((l) => {
+                    const to = FOOTER_ROUTES[l];
+                    return (
+                      <li key={l}>
+                        {to ? (
+                          <button
+                            type="button"
+                            onClick={() => navigate(to)}
+                            className="bg-transparent border-none p-0 cursor-pointer text-left text-[13.5px] text-[rgba(245,240,232,0.6)] font-sans-app transition-colors duration-[220ms] hover:text-[#e0906f]"
+                          >
+                            {l}
+                          </button>
+                        ) : (
+                          <a
+                            href="#"
+                            className="text-[13.5px] text-[rgba(245,240,232,0.6)] no-underline transition-colors duration-[220ms] hover:text-[#e0906f]"
+                          >
+                            {l}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Newsletter — horizontal on large, vertical on small */}
+        <div className="mt-7 pt-6 border-t border-[rgba(245,240,232,0.1)] flex items-center gap-6 max-md:flex-col max-md:items-start max-md:gap-4">
+          <h4 className="text-[17px] text-[#e0906f] font-serif-app italic shrink-0">
+            Stay in the Warren
+          </h4>
+          <p className="text-[13.5px] leading-[1.5] flex-1 min-w-[160px] max-md:flex-none">
+            New arrivals and rabbit-approved picks — monthly.
+          </p>
+          <div className="flex gap-2 shrink-0 max-md:w-full">
+            <input
+              type="email"
+              placeholder="your@email.com"
+              aria-label="Email address"
+              className="w-[230px] max-md:flex-1 bg-[rgba(255,255,255,0.05)] border border-[rgba(245,240,232,0.18)] rounded-lg py-2.5 px-4 text-[13px] text-[#f5f0e8] font-sans-app outline-none transition-all duration-[220ms] placeholder:text-[rgba(245,240,232,0.4)] focus:border-[#d97a5c] focus:bg-[rgba(255,255,255,0.08)]"
+            />
+            <button
+              type="button"
+              className="flex items-center justify-center gap-2 bg-[#c85a3c] text-white text-[13px] font-bold tracking-[1px] uppercase py-2.5 px-6 rounded-lg cursor-pointer border-none transition-all duration-[220ms] whitespace-nowrap hover:bg-[#d97a5c] hover:shadow-[0_6px_20px_rgba(200,90,60,0.35)]"
+            >
+              Subscribe 🐰
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom bar */}
+      <div className="relative z-[1] border-t border-[rgba(245,240,232,0.1)]">
+        <div className="max-w-[1400px] mx-auto px-16 py-4 flex items-center justify-between gap-4 flex-wrap max-lg:px-8 max-md:px-6 max-md:flex-col max-md:items-start max-md:gap-2.5">
+          <p className="text-[12px] text-[rgba(245,240,232,0.45)] m-0">
+            © 2026 The Rabbit Liquor Co. · Drink responsibly. Must be 21+ to
+            purchase.
+          </p>
+          <div className="flex gap-7">
+            {["Privacy", "Terms", "Cookies"].map((l) => (
+              <a
+                key={l}
+                href="#"
+                className="text-[12px] text-[rgba(245,240,232,0.5)] no-underline transition-colors duration-[220ms] hover:text-[#e0906f]"
+              >
+                {l}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
+
+/* ================================================================
    HOME PAGE
    ================================================================ */
 
@@ -1430,7 +1572,7 @@ export default function HomePage() {
   const categories = ["all", ...new Set(data.map((p) => p.category))];
 
   return (
-    <div className="bg-bg-base text-text-main font-sans-app min-h-svh overflow-x-hidden">
+    <div className="rl-app bg-[#f3ebda] text-[#3a424b] font-sans-app min-h-svh overflow-x-hidden">
       {page === "story" ? (
         <main>
           <StoryPage />
@@ -1440,7 +1582,9 @@ export default function HomePage() {
           <HeroSection />
           <RangeSection />
           <TrendingSection data={data} />
-          <ReviewsSection />
+          {/* TESTIMONIALS temporarily hidden */}
+          {/* <ReviewsSection /> */}
+          <SiteFooter />
         </main>
       )}
       {/* <Footer onNavigate={setPage} /> */}

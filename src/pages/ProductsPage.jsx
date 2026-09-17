@@ -10,13 +10,57 @@ import WhiskeySpinner from "@/components/WhiskeySpinner";
 const PAGE_SIZE = 12;
 const BATCH_SIZE = 8;
 
+// ── Fuzzy search: typo-tolerant matching ─────────────────────────
+const normalize = (s) =>
+  (s ?? "").toString().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+function levenshtein(a, b) {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+  const prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    let prevDiag = prev[0];
+    prev[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      const temp = prev[j];
+      prev[j] = Math.min(
+        prev[j] + 1,
+        prev[j - 1] + 1,
+        prevDiag + (a[i - 1] === b[j - 1] ? 0 : 1)
+      );
+      prevDiag = temp;
+    }
+  }
+  return prev[b.length];
+}
+
+// Returns true if every query token loosely matches the haystack (allows typos).
+function fuzzyMatch(query, haystack) {
+  const q = normalize(query);
+  if (!q) return true;
+  const t = normalize(haystack);
+  if (t.includes(q)) return true;
+  const tTokens = t.split(" ");
+  return q.split(" ").every((qt) => {
+    if (t.includes(qt)) return true;
+    return tTokens.some((tt) => {
+      if (tt.includes(qt) || qt.includes(tt)) return true;
+      const tol = Math.max(1, Math.floor(Math.max(qt.length, tt.length) * 0.34));
+      return levenshtein(qt, tt) <= tol;
+    });
+  });
+}
+
 const ProductsPage = () => {
   const { addToCart } = useCart();
   const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchQuery, setSearchQuery] = useState(
+    () => searchParams.get("search") ?? ""
+  );
   const { data = [], isLoading, error } = getProducts();
   const { mutate, isPending } = reserveProduct();
-  const [searchParams] = useSearchParams();
   const [categoryFilter, setCategoryFilter] = useState(
     () => searchParams.get("category") ?? "all"
   );
@@ -31,6 +75,11 @@ const ProductsPage = () => {
   useEffect(() => {
     const cat = searchParams.get("category") ?? "all";
     setCategoryFilter(cat);
+  }, [searchParams]);
+
+  useEffect(() => {
+    const s = searchParams.get("search");
+    if (s !== null) setSearchQuery(s);
   }, [searchParams]);
 
   useEffect(() => {
@@ -54,9 +103,10 @@ const ProductsPage = () => {
   }, []);
 
   const filteredProducts = data.filter((product) => {
-    const matchesSearch = product.item_name
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+    const haystack = `${product.item_name} ${product.category ?? ""} ${
+      product.origin ?? ""
+    }`;
+    const matchesSearch = fuzzyMatch(searchQuery, haystack);
     const matchesCategory =
       categoryFilter === "all" || product.category === categoryFilter;
     return matchesSearch && matchesCategory;
@@ -108,7 +158,7 @@ const ProductsPage = () => {
       </div>
 
       {/* Search and Filter */}
-      <div className={`flex items-center gap-3.5 mb-6 flex-wrap sticky top-16 z-[9] transition-all duration-300 ${scrolled ? 'bg-[rgba(8,8,8,0.97)] backdrop-blur-[18px] shadow-[0_4px_24px_rgba(0,0,0,0.55)] border-b border-[rgba(201,168,76,0.14)] py-2.5 px-4 -mx-4 !mb-5' : ''}`}>
+      <div className={`flex items-center gap-3.5 mb-6 flex-wrap sticky top-16 z-[9] transition-all duration-300 ${scrolled ? 'bg-[rgba(243,235,218,0.95)] backdrop-blur-[18px] shadow-[0_4px_24px_rgba(45,51,58,0.12)] border-b border-[rgba(45,51,58,0.12)] py-2.5 px-4 -mx-4 !mb-5' : ''}`}>
         <div className="relative flex-1 min-w-[200px] flex items-center">
           <Search className="absolute left-3.5 text-gold pointer-events-none shrink-0 w-4 h-4" />
           <input
@@ -116,13 +166,13 @@ const ProductsPage = () => {
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(201,168,76,0.22)] rounded-full py-2.5 pr-[18px] pl-[42px] text-[13px] text-text-main font-sans-app outline-none transition-all duration-[280ms] placeholder:text-text-dim focus:border-gold focus:bg-[rgba(255,255,255,0.06)]"
+            className="w-full bg-[rgba(45,51,58,0.04)] border border-[rgba(45,51,58,0.16)] rounded-full py-2.5 pr-[18px] pl-[42px] text-[13px] text-text-main font-sans-app outline-none transition-all duration-[280ms] placeholder:text-text-dim focus:border-gold focus:bg-[rgba(45,51,58,0.06)]"
           />
         </div>
         <div className="relative min-w-[175px]" ref={dropdownRef}>
           <button
             type="button"
-            className={`flex items-center justify-between gap-2.5 w-full bg-[rgba(255,255,255,0.04)] border border-[rgba(201,168,76,0.22)] rounded-full py-2.5 pl-5 pr-4 text-[13px] text-text-main font-sans-app cursor-pointer outline-none transition-all duration-[280ms] whitespace-nowrap hover:border-[rgba(201,168,76,0.55)] hover:bg-[rgba(255,255,255,0.07)] ${dropdownOpen ? 'border-[rgba(201,168,76,0.55)] bg-[rgba(255,255,255,0.07)]' : ''}`}
+            className={`flex items-center justify-between gap-2.5 w-full bg-[rgba(45,51,58,0.04)] border border-[rgba(45,51,58,0.16)] rounded-full py-2.5 pl-5 pr-4 text-[13px] text-text-main font-sans-app cursor-pointer outline-none transition-all duration-[280ms] whitespace-nowrap hover:border-[rgba(194,90,58,0.55)] hover:bg-[rgba(45,51,58,0.06)] ${dropdownOpen ? 'border-[rgba(194,90,58,0.55)] bg-[rgba(45,51,58,0.06)]' : ''}`}
             onClick={() => setDropdownOpen((o) => !o)}
           >
             <span>
@@ -132,12 +182,12 @@ const ProductsPage = () => {
           </button>
 
           {dropdownOpen && (
-            <ul className="absolute top-[calc(100%+6px)] right-0 min-w-full bg-bg-card2 border border-[rgba(201,168,76,0.25)] rounded-[14px] p-1.5 list-none m-0 z-[100] shadow-[0_12px_40px_rgba(0,0,0,0.6)] animate-pp-dd-in">
+            <ul className="absolute top-[calc(100%+6px)] right-0 min-w-full bg-bg-card2 border border-[rgba(45,51,58,0.16)] rounded-[14px] p-1.5 list-none m-0 z-[100] shadow-[0_12px_40px_rgba(45,51,58,0.2)] animate-pp-dd-in">
               {categories.map((category) => (
                 <li key={category}>
                   <button
                     type="button"
-                    className={`block w-full text-left bg-transparent border-none rounded-lg py-[9px] px-3.5 text-[13px] text-[#ccc] font-sans-app cursor-pointer transition-all duration-[180ms] whitespace-nowrap hover:bg-[rgba(201,168,76,0.12)] hover:text-gold-light ${categoryFilter === category ? 'bg-[rgba(201,168,76,0.18)] text-gold font-semibold' : ''}`}
+                    className={`block w-full text-left bg-transparent border-none rounded-lg py-[9px] px-3.5 text-[13px] text-[#3a424b] font-sans-app cursor-pointer transition-all duration-[180ms] whitespace-nowrap hover:bg-[rgba(209,112,79,0.12)] hover:text-gold-light ${categoryFilter === category ? 'bg-[rgba(209,112,79,0.18)] text-gold font-semibold' : ''}`}
                     onClick={() => {
                       setCategoryFilter(category);
                       setDropdownOpen(false);

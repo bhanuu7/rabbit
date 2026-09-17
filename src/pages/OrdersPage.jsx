@@ -79,7 +79,7 @@ function OrderCard({ order }) {
           <p className="text-[9px] uppercase tracking-[1.6px] text-[#555] mb-0.5">
             Order placed
           </p>
-          <p className="text-[13px] text-[#ccc]">
+          <p className="text-[13px] text-[#3a424b]">
             {new Date(order.created_at).toLocaleDateString("en-US", {
               year: "numeric",
               month: "long",
@@ -99,7 +99,7 @@ function OrderCard({ order }) {
           <p className="text-[9px] uppercase tracking-[1.6px] text-[#555] mb-0.5">
             Order #
           </p>
-          <p className="text-[13px] text-[#ccc] font-mono tracking-wide">
+          <p className="text-[13px] text-[#3a424b] font-mono tracking-wide">
             {order.order_id}
           </p>
         </div>
@@ -116,9 +116,9 @@ function OrderCard({ order }) {
           return (
             <div key={i} className="flex items-center gap-4">
               <div
-                className={`w-14 h-14 rounded-lg flex items-center justify-center shrink-0 border border-[rgba(201,168,76,0.12)] ${isCancelled ? "opacity-40 grayscale" : ""}`}
+                className={`w-14 h-14 rounded-lg flex items-center justify-center shrink-0 border border-[rgba(45,51,58,0.12)] ${isCancelled ? "opacity-40 grayscale" : ""}`}
                 style={{
-                  background: `radial-gradient(circle at 40% 30%, ${fallback.color}18, #111)`,
+                  background: `radial-gradient(circle at 40% 30%, ${fallback.color}18, #ece1cd)`,
                 }}
               >
                 <div className="w-8 h-10 overflow-hidden">
@@ -134,7 +134,7 @@ function OrderCard({ order }) {
               </div>
               <div className="flex-1 min-w-0">
                 <p
-                  className={`text-[13px] font-medium leading-tight truncate ${isCancelled ? "text-[#555] line-through" : "text-white"}`}
+                  className={`text-[13px] font-medium leading-tight truncate ${isCancelled ? "text-[#8a94a0] line-through" : "text-text-main"}`}
                 >
                   {item.item_name}
                 </p>
@@ -178,7 +178,7 @@ function OrderCard({ order }) {
         {!isCancelled && (
           <Button
             size="sm"
-            className="bg-gradient-to-br from-gold to-[#8b6914] text-black border-none hover:from-[#f0d080] hover:to-gold text-[12px] font-semibold h-8 px-4"
+            className="bg-gradient-to-br from-gold to-[#a8461f] text-white border-none hover:from-[#d97a5c] hover:to-gold text-[12px] font-semibold h-8 px-4"
           >
             <Package className="w-3.5 h-3.5 mr-1.5" />
             {order.status === "picked_up" ? "View Receipt" : "Track Order"}
@@ -187,7 +187,7 @@ function OrderCard({ order }) {
         <Button
           size="sm"
           variant="outline"
-          className="border-[rgba(201,168,76,0.22)] text-[#888] bg-transparent hover:text-gold hover:border-gold hover:bg-[rgba(201,168,76,0.07)] text-[12px] h-8 px-4"
+          className="border-[rgba(194,90,58,0.3)] text-[#6b7681] bg-transparent hover:text-gold hover:border-gold hover:bg-[rgba(209,112,79,0.1)] text-[12px] h-8 px-4"
         >
           <RotateCcw className="w-3.5 h-3.5 mr-1.5" />
           Reorder
@@ -236,8 +236,8 @@ export default function OrdersPage() {
                 onClick={() => setActiveFilter(key)}
                 className={`shrink-0 px-3.5 py-1.5 rounded-full text-[12px] font-semibold border transition-all duration-[220ms] cursor-pointer ${
                   activeFilter === key
-                    ? "bg-gold text-black border-gold"
-                    : "bg-transparent text-[#666] border-[rgba(201,168,76,0.2)] hover:text-gold hover:border-[rgba(201,168,76,0.45)]"
+                    ? "bg-gold text-white border-gold"
+                    : "bg-transparent text-[#6b7681] border-[rgba(45,51,58,0.16)] hover:text-gold hover:border-[rgba(194,90,58,0.45)]"
                 }`}
               >
                 {label}
@@ -250,7 +250,7 @@ export default function OrdersPage() {
               placeholder="Search by order or item…"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="bg-[rgba(255,255,255,0.04)] border-[rgba(201,168,76,0.22)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px] pl-9 rounded-full placeholder:text-text-dim h-9"
+              className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.16)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] pl-9 rounded-full placeholder:text-text-dim h-9"
             />
           </div>
         </div>

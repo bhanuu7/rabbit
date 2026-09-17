@@ -5,9 +5,9 @@
 
 @custom-variant dark (&:is(.dark *));
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
+  --text: #3a424b;
+  --text-h: #2d333a;
+  --bg: #f3ebda;
   --border: oklch(0.922 0 0);
   --code-bg: #f4f3ec;
   --accent: oklch(0.97 0 0);
@@ -98,9 +98,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
+    --text: #3a424b;
+    --text-h: #2d333a;
+    --bg: #f3ebda;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -220,15 +220,15 @@ code {
   --variant-dark: (.dark &);
 
   /* Custom app tokens */
-  --color-gold: #c9a84c;
-  --color-gold-light: #f0d080;
-  --color-gold-dark: #8b6914;
-  --color-bg-base: #080808;
-  --color-bg-card: #111111;
-  --color-bg-card2: #161616;
-  --color-text-main: #e5e5e5;
-  --color-text-muted-app: #888;
-  --color-text-dim: #555;
+  --color-gold: #c25a3a;
+  --color-gold-light: #d97a5c;
+  --color-gold-dark: #a8461f;
+  --color-bg-base: #f3ebda;
+  --color-bg-card: #fbf5ea;
+  --color-bg-card2: #f6eedf;
+  --color-text-main: #3a424b;
+  --color-text-muted-app: #6b7681;
+  --color-text-dim: #8a94a0;
   --color-cream: #f5f0e8;
   --font-serif-app: 'Georgia', 'Times New Roman', serif;
   --font-sans-app: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
@@ -434,16 +434,16 @@ code {
    ================================================================ */
 
 :root {
-  --gold:           #c9a84c;
-  --gold-light:     #f0d080;
-  --gold-dark:      #8b6914;
-  --bg-base:        #080808;
-  --bg-card:        #111111;
-  --bg-card2:       #161616;
-  --rl-border:      rgba(201, 168, 76, 0.18);
-  --border-hover:   rgba(201, 168, 76, 0.5);
-  --text-muted:     #888888;
-  --text-dim:       #555555;
+  --gold:           #c25a3a;
+  --gold-light:     #d97a5c;
+  --gold-dark:      #a8461f;
+  --bg-base:        #f3ebda;
+  --bg-card:        #fbf5ea;
+  --bg-card2:       #f6eedf;
+  --rl-border:      rgba(45, 51, 58, 0.14);
+  --border-hover:   rgba(194, 90, 58, 0.45);
+  --text-muted:     #6b7681;
+  --text-dim:       #8a94a0;
   --font-serif:     'Georgia', 'Times New Roman', serif;
   --font-sans-rl:   'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
   --rl-radius:      6px;

@@ -33,9 +33,9 @@ function CartItem({ item, addToCart, removeFromCart }) {
     CATEGORY_FALLBACK[item.product.category] || CATEGORY_FALLBACK.default;
 
   return (
-    <div className="flex gap-4 py-5 px-6 transition-colors duration-200 not-last:border-b not-last:border-[rgba(201,168,76,0.08)] hover:bg-[rgba(255,255,255,0.015)]">
+    <div className="flex gap-4 py-5 px-6 transition-colors duration-200 not-last:border-b not-last:border-[rgba(45,51,58,0.1)] hover:bg-[rgba(45,51,58,0.03)]">
       {/* Thumbnail */}
-      <div className="w-[88px] h-[88px] shrink-0 rounded-lg overflow-hidden border border-[rgba(201,168,76,0.15)] bg-[#0d0d0d]">
+      <div className="w-[88px] h-[88px] shrink-0 rounded-lg overflow-hidden border border-[rgba(45,51,58,0.12)] bg-[#ece1cd]">
         {!imgError && item.product.image_url ? (
           <img
             src={item.product.image_url}
@@ -44,7 +44,7 @@ function CartItem({ item, addToCart, removeFromCart }) {
             onError={() => setImgError(true)}
           />
         ) : (
-          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#131313] to-[#0d0d0d]">
+          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#f6eedf] to-[#ece1cd]">
             <BottleSVG
               color={fallback.color}
               label={item.product.category.toUpperCase()}
@@ -153,7 +153,7 @@ function CartPage() {
     return (
       <div className="min-h-screen bg-bg-base text-text-main font-sans-app px-4 py-8">
         <div className="flex flex-col items-center justify-center min-h-[380px] gap-3.5 text-center">
-          <div className="w-[88px] h-[88px] rounded-full bg-[rgba(201,168,76,0.06)] border border-[rgba(201,168,76,0.18)] flex items-center justify-center text-[#444]">
+          <div className="w-[88px] h-[88px] rounded-full bg-[rgba(209,112,79,0.08)] border border-[rgba(45,51,58,0.14)] flex items-center justify-center text-[#8a94a0]">
             <ShoppingCart size={40} />
           </div>
           <h2 className="text-[22px] font-bold text-[#888] font-serif-app">
@@ -163,7 +163,7 @@ function CartPage() {
             Add some products to your cart to get started
           </p>
           <button
-            className="inline-flex items-center justify-center gap-2 py-3 px-7 bg-gradient-to-br from-gold to-gold-dark text-black text-[13px] font-bold tracking-[0.8px] uppercase border-none rounded-md cursor-pointer transition-all duration-[280ms] font-[inherit] mt-1.5 hover:bg-gradient-to-br hover:from-gold-light hover:to-gold hover:shadow-[0_6px_20px_rgba(201,168,76,0.3)]"
+            className="inline-flex items-center justify-center gap-2 py-3 px-7 bg-gradient-to-br from-gold to-gold-dark text-white text-[13px] font-bold tracking-[0.8px] uppercase border-none rounded-md cursor-pointer transition-all duration-[280ms] font-[inherit] mt-1.5 hover:bg-gradient-to-br hover:from-gold-light hover:to-gold hover:shadow-[0_6px_20px_rgba(209,112,79,0.3)]"
             onClick={() => navigate("/products")}
           >
             Continue Shopping
@@ -255,7 +255,7 @@ function CartPage() {
             </div>
 
             <button
-              className="flex items-center justify-center w-full py-3.5 bg-gradient-to-br from-gold to-gold-dark text-black text-[13px] font-bold tracking-[1px] uppercase border-none rounded-md cursor-pointer transition-all duration-[280ms] font-[inherit] hover:bg-gradient-to-br hover:from-gold-light hover:to-gold hover:shadow-[0_6px_20px_rgba(201,168,76,0.3)]"
+              className="flex items-center justify-center w-full py-3.5 bg-gradient-to-br from-gold to-gold-dark text-white text-[13px] font-bold tracking-[1px] uppercase border-none rounded-md cursor-pointer transition-all duration-[280ms] font-[inherit] hover:bg-gradient-to-br hover:from-gold-light hover:to-gold hover:shadow-[0_6px_20px_rgba(209,112,79,0.3)]"
               onClick={() => setCheckoutOpen(true)}
             >
               Reserve for Pickup
@@ -326,7 +326,7 @@ function CartPage() {
                 </button>
                 <button
                   type="submit"
-                  className="py-2.5 px-6 bg-gradient-to-br from-gold to-gold-dark text-black text-[13px] font-bold border-none rounded-md cursor-pointer transition-all duration-[280ms] font-[inherit] tracking-[0.4px] hover:bg-gradient-to-br hover:from-gold-light hover:to-gold hover:shadow-[0_4px_16px_rgba(201,168,76,0.3)] disabled:opacity-55 disabled:cursor-not-allowed"
+                  className="py-2.5 px-6 bg-gradient-to-br from-gold to-gold-dark text-white text-[13px] font-bold border-none rounded-md cursor-pointer transition-all duration-[280ms] font-[inherit] tracking-[0.4px] hover:bg-gradient-to-br hover:from-gold-light hover:to-gold hover:shadow-[0_4px_16px_rgba(209,112,79,0.3)] disabled:opacity-55 disabled:cursor-not-allowed"
                   disabled={isPending}
                 >
                   {isPending ? "Confirming…" : "Confirm Reservation"}

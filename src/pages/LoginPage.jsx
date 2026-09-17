@@ -126,7 +126,7 @@ export default function LoginPage() {
 
   // ── Shared input styles ──────────────────────────────────────
   const inputClass =
-    "h-11 rounded-lg border-gold/20 bg-white/[0.04] text-white placeholder:text-[#555] focus-visible:border-gold/60 focus-visible:ring-gold/15";
+    "h-11 rounded-lg border-gold/25 bg-[#2d333a]/[0.04] text-[#3a424b] placeholder:text-[#8a94a0] focus-visible:border-gold/60 focus-visible:ring-gold/15";
   const labelClass =
     "text-[11px] font-semibold tracking-[1.5px] uppercase text-gold/70";
 
@@ -139,7 +139,7 @@ export default function LoginPage() {
             <div className="mx-auto mb-3 flex size-14 items-center justify-center rounded-full border border-gold/30 bg-gold/[0.08]">
               <ShieldCheck className="size-7 text-gold" />
             </div>
-            <CardTitle className="font-serif-app text-xl text-white">
+            <CardTitle className="font-serif-app text-xl text-[#2d333a]">
               Verify Your Email
             </CardTitle>
             <CardDescription className="text-[13px] text-gold/50">
@@ -173,7 +173,7 @@ export default function LoginPage() {
                 type="submit"
                 disabled={isLoading}
                 size="lg"
-                className="w-full h-11 bg-gradient-to-br from-gold to-gold-dark text-black font-bold tracking-wide uppercase hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(201,168,76,0.25)]"
+                className="w-full h-11 bg-gradient-to-br from-gold to-gold-dark text-white font-bold tracking-wide uppercase hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(194,90,58,0.3)]"
               >
                 Verify & Sign In
               </Button>
@@ -207,7 +207,7 @@ export default function LoginPage() {
           <p className="text-[10px] tracking-[4px] uppercase text-gold/80">
             Premium Spirits
           </p>
-          <CardTitle className="font-serif-app text-xl text-white">
+          <CardTitle className="font-serif-app text-xl text-[#2d333a]">
             Welcome to <em className="text-gold italic">Rabbit Liquor</em>
           </CardTitle>
         </CardHeader>
@@ -218,16 +218,16 @@ export default function LoginPage() {
             onValueChange={setActiveTab}
             className="w-full"
           >
-            <TabsList className="grid w-full grid-cols-2 mb-5 bg-white/[0.04]">
+            <TabsList className="grid w-full grid-cols-2 mb-5 bg-[#2d333a]/[0.05]">
               <TabsTrigger
                 value="signin"
-                className="text-gold/50 data-[state=active]:text-gold data-[state=active]:bg-gold/10"
+                className="font-semibold text-[#6b7681] data-active:!bg-gold data-active:!text-white"
               >
                 Sign In
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="text-gold/50 data-[state=active]:text-gold data-[state=active]:bg-gold/10"
+                className="font-semibold text-[#6b7681] data-active:!bg-gold data-active:!text-white"
               >
                 Sign Up
               </TabsTrigger>
@@ -276,7 +276,7 @@ export default function LoginPage() {
                   type="submit"
                   disabled={isLoading}
                   size="lg"
-                  className="w-full h-11 mt-1 bg-gradient-to-br from-gold to-gold-dark text-black font-bold tracking-wide uppercase hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(201,168,76,0.25)]"
+                  className="w-full h-11 mt-1 bg-gradient-to-br from-gold to-gold-dark text-white font-bold tracking-wide uppercase hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(194,90,58,0.3)]"
                 >
                   Sign In
                 </Button>
@@ -337,7 +337,7 @@ export default function LoginPage() {
                   type="submit"
                   disabled={isLoading}
                   size="lg"
-                  className="w-full h-11 mt-1 bg-gradient-to-br from-gold to-gold-dark text-black font-bold tracking-wide uppercase hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(201,168,76,0.25)]"
+                  className="w-full h-11 mt-1 bg-gradient-to-br from-gold to-gold-dark text-white font-bold tracking-wide uppercase hover:opacity-90 transition-all shadow-[0_4px_20px_rgba(194,90,58,0.3)]"
                 >
                   Create Account
                 </Button>

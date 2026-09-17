@@ -17,6 +17,8 @@ const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 const Inventory = lazy(() => import("./pages/Inventory"));
 const CartPage = lazy(() => import("./pages/CartPage"));
 const OrdersPage = lazy(() => import("./pages/OrdersPage"));
+const FAQ = lazy(() => import("./pages/FAQ"));
+const ContactUs = lazy(() => import("./pages/ContactUs"));
 
 Amplify.configure({
   Auth: {
@@ -65,6 +67,8 @@ function App() {
                       <Route path="/cart" element={<CartPage />} />
                       <Route path="/orders" element={<OrdersPage />} />
                       <Route path="/customers" element={<CustomersPage />} />
+                      <Route path="/faq" element={<FAQ />} />
+                      <Route path="/contact" element={<ContactUs />} />
                     </Route>
                   </Routes>
                 </Suspense>

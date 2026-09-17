@@ -253,64 +253,64 @@ export default function Inventory() {
       <div className="mb-8 grid gap-4 md:grid-cols-4">
         <Card className="bg-bg-card border-[rgba(201,168,76,0.18)] hover:border-[rgba(201,168,76,0.4)] transition-all duration-[280ms]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#888] font-sans-app font-normal">
+            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#5c6670] font-sans-app font-semibold">
               Total Products
             </CardTitle>
             <Package className="w-4 h-4 text-gold opacity-70" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white font-serif-app">
+            <div className="text-3xl font-bold text-[#2d333a] font-serif-app">
               {productsData.length}
             </div>
-            <p className="text-[11px] text-text-dim mt-1">
+            <p className="text-[11px] text-[#6b7681] mt-1">
               {outOfStockItems.length} out of stock
             </p>
           </CardContent>
         </Card>
         <Card className="bg-bg-card border-[rgba(201,168,76,0.18)] hover:border-[rgba(201,168,76,0.4)] transition-all duration-[280ms]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#888] font-sans-app font-normal">
+            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#5c6670] font-sans-app font-semibold">
               Running Out
             </CardTitle>
             <TriangleAlert className="w-4 h-4 text-gold opacity-70" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white font-serif-app">
+            <div className="text-3xl font-bold text-[#2d333a] font-serif-app">
               {runningOutOfStockItems.length}
             </div>
-            <p className="text-[11px] text-text-dim mt-1">
+            <p className="text-[11px] text-[#6b7681] mt-1">
               {runningOutOfStockItems.length} might go out of stock
             </p>
           </CardContent>
         </Card>
         <Card className="bg-bg-card border-[rgba(201,168,76,0.18)] hover:border-[rgba(201,168,76,0.4)] transition-all duration-[280ms]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#888] font-sans-app font-normal">
+            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#5c6670] font-sans-app font-semibold">
               Reservations
             </CardTitle>
             <ShoppingBag className="w-4 h-4 text-gold opacity-70" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white font-serif-app">
+            <div className="text-3xl font-bold text-[#2d333a] font-serif-app">
               {ordersData.length}
             </div>
-            <p className="text-[11px] text-text-dim mt-1">
+            <p className="text-[11px] text-[#6b7681] mt-1">
               {ordersData.length} total reservations
             </p>
           </CardContent>
         </Card>
         <Card className="bg-bg-card border-[rgba(201,168,76,0.18)] hover:border-[rgba(201,168,76,0.4)] transition-all duration-[280ms]">
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#888] font-sans-app font-normal">
+            <CardTitle className="text-[11px] uppercase tracking-[1.5px] text-[#5c6670] font-sans-app font-semibold">
               Notify Requests
             </CardTitle>
             <Bell className="w-4 h-4 text-gold opacity-70" />
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-white font-serif-app">
+            <div className="text-3xl font-bold text-[#2d333a] font-serif-app">
               {notifyRequests.length}
             </div>
-            <p className="text-[11px] text-text-dim mt-1">
+            <p className="text-[11px] text-[#6b7681] mt-1">
               Customers waiting for restock
             </p>
           </CardContent>
@@ -319,7 +319,7 @@ export default function Inventory() {
 
       {/* Tabs */}
       <Tabs defaultValue="products" className="space-y-4">
-        <TabsList className="bg-bg-card border border-[rgba(201,168,76,0.18)] p-1 rounded-lg h-auto gap-1 [&>[data-state=active]]:bg-gold [&>[data-state=active]]:text-black [&>[data-state=inactive]]:text-[#888] [&>[data-state=inactive]]:hover:text-gold">
+        <TabsList className="bg-bg-card border border-[rgba(45,51,58,0.14)] p-1 rounded-lg h-auto gap-1 [&>[data-state=active]]:bg-gold [&>[data-state=active]]:text-white [&>[data-state=inactive]]:text-[#6b7681] [&>[data-state=inactive]]:hover:text-gold">
           <TabsTrigger
             value="products"
             className="text-[12px] tracking-[0.8px] uppercase font-semibold px-4 py-2 rounded-md transition-all duration-[280ms] cursor-pointer"
@@ -348,17 +348,17 @@ export default function Inventory() {
             </h2>
             <Dialog open={addDialogOpen} onOpenChange={setAddDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-gradient-to-br from-gold to-[#8b6914] text-black border-none hover:from-[#f0d080] hover:to-gold hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(201,168,76,0.3)] transition-all duration-[280ms]">
+                <Button className="bg-gradient-to-br from-gold to-[#a8461f] text-white border-none hover:from-[#d97a5c] hover:to-gold hover:-translate-y-px hover:shadow-[0_6px_20px_rgba(209,112,79,0.3)] transition-all duration-[280ms]">
                   <Plus className="w-4 h-4" />
                   Add Product
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-bg-card border border-[rgba(201,168,76,0.28)] text-text-main max-h-[80vh] overflow-y-auto sm:max-w-lg mt-8 top-[48%] [&_[data-slot=dialog-close]]:text-[#888] [&_[data-slot=dialog-close]:hover]:text-gold [&_[data-slot=dialog-close]:hover]:bg-[rgba(201,168,76,0.08)]">
+              <DialogContent className="bg-bg-card border border-[rgba(45,51,58,0.16)] text-text-main max-h-[80vh] overflow-y-auto sm:max-w-lg mt-8 top-[48%] [&_[data-slot=dialog-close]]:text-[#6b7681] [&_[data-slot=dialog-close]:hover]:text-gold [&_[data-slot=dialog-close]:hover]:bg-[rgba(209,112,79,0.1)]">
                 <DialogHeader>
                   <DialogTitle className="text-white font-serif-app text-lg tracking-wide">
                     Add New Product
                   </DialogTitle>
-                  <DialogDescription className="text-[#888] text-[13px]">
+                  <DialogDescription className="text-[#6b7681] text-[13px]">
                     Enter the details for the new product
                   </DialogDescription>
                 </DialogHeader>
@@ -419,7 +419,7 @@ export default function Inventory() {
                                 : e.target.value,
                           })
                         }
-                        className="bg-[#0d0d0d] border-[rgba(201,168,76,0.22)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app"
+                        className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.16)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app"
                       />
                     </div>
                   ))}
@@ -432,7 +432,7 @@ export default function Inventory() {
                       accept="image/*"
                       capture="environment"
                       onChange={handleImageCapture}
-                      className="bg-[#0d0d0d] border-[rgba(201,168,76,0.22)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app"
+                      className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.16)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app"
                     />
                     {preview && (
                       <div className="mt-2">
@@ -456,9 +456,9 @@ export default function Inventory() {
                           category: e.target.value,
                         })
                       }
-                      className="w-full bg-[#0d0d0d] border border-[rgba(201,168,76,0.22)] rounded-md px-3 py-2 text-[13px] text-white outline-none transition-all duration-[280ms] focus:border-gold focus:bg-[rgba(201,168,76,0.04)] font-sans-app cursor-pointer appearance-none"
+                      className="w-full bg-[rgba(45,51,58,0.04)] border border-[rgba(45,51,58,0.16)] rounded-md px-3 py-2 text-[13px] text-text-main outline-none transition-all duration-[280ms] focus:border-gold focus:bg-[rgba(209,112,79,0.06)] font-sans-app cursor-pointer appearance-none"
                       style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c9a84c' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23c25a3a' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E")`,
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "right 12px center",
                       }}
@@ -466,7 +466,7 @@ export default function Inventory() {
                       <option
                         value=""
                         disabled
-                        className="bg-[#111] text-[#555]"
+                        className="bg-[#fbf5ea] text-[#8a94a0]"
                       >
                         Select a category…
                       </option>
@@ -474,7 +474,7 @@ export default function Inventory() {
                         <option
                           key={cat}
                           value={cat}
-                          className="bg-[#111] text-white"
+                          className="bg-[#fbf5ea] text-[#3a424b]"
                         >
                           {cat}
                         </option>
@@ -494,7 +494,7 @@ export default function Inventory() {
                         })
                       }
                       rows={3}
-                      className="bg-[#0d0d0d] border-[rgba(201,168,76,0.22)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app resize-none"
+                      className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.16)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app resize-none"
                     />
                   </div>
                 </div>
@@ -502,13 +502,13 @@ export default function Inventory() {
                   <Button
                     variant="outline"
                     onClick={() => setAddDialogOpen(false)}
-                    className="border-[rgba(201,168,76,0.22)] text-[#888] bg-transparent hover:text-gold hover:border-gold hover:bg-[rgba(201,168,76,0.08)]"
+                    className="border-[rgba(45,51,58,0.16)] text-[#6b7681] bg-transparent hover:text-gold hover:border-gold hover:bg-[rgba(209,112,79,0.1)]"
                   >
                     Cancel
                   </Button>
                   <Button
                     onClick={handleAddProduct}
-                    className="bg-gradient-to-br from-gold to-[#8b6914] text-black border-none hover:from-[#f0d080] hover:to-gold"
+                    className="bg-gradient-to-br from-gold to-[#a8461f] text-white border-none hover:from-[#d97a5c] hover:to-gold"
                   >
                     Add Product
                   </Button>
@@ -545,7 +545,7 @@ export default function Inventory() {
                       key={product.id}
                       className="border-b border-[rgba(201,168,76,0.08)] hover:bg-[rgba(201,168,76,0.03)]"
                     >
-                      <TableCell className="text-white">
+                      <TableCell className="text-text-main">
                         {editingProduct?.id === product.id ? (
                           <Input
                             value={editingProduct.item_name}
@@ -555,7 +555,7 @@ export default function Inventory() {
                                 item_name: e.target.value,
                               })
                             }
-                            className="bg-[#0d0d0d] border-[rgba(201,168,76,0.3)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px]"
+                            className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.18)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px]"
                           />
                         ) : (
                           <div className="flex items-center gap-3">
@@ -570,7 +570,7 @@ export default function Inventory() {
                           </div>
                         )}
                       </TableCell>
-                      <TableCell className="text-[#aaa] text-[13px] text-left ">
+                      <TableCell className="text-[#6b7681] text-[13px] text-left ">
                         {editingProduct?.id === product.id ? (
                           <Input
                             value={editingProduct.category}
@@ -580,7 +580,7 @@ export default function Inventory() {
                                 category: e.target.value,
                               })
                             }
-                            className="bg-[#0d0d0d] border-[rgba(201,168,76,0.3)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px]"
+                            className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.18)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px]"
                           />
                         ) : (
                           product.category
@@ -598,7 +598,7 @@ export default function Inventory() {
                                 price: parseFloat(e.target.value) || 0,
                               })
                             }
-                            className="bg-[#0d0d0d] border-[rgba(201,168,76,0.3)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px] w-24"
+                            className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.18)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] w-24"
                           />
                         ) : (
                           <span className="text-gold font-semibold font-serif-app">
@@ -617,7 +617,7 @@ export default function Inventory() {
                                 stock_count: parseInt(e.target.value) || 0,
                               })
                             }
-                            className="bg-[#0d0d0d] border-[rgba(201,168,76,0.3)] text-white focus-visible:ring-0 focus-visible:border-gold text-[13px] w-20"
+                            className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.18)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] w-20"
                           />
                         ) : (
                           <Badge
@@ -639,7 +639,7 @@ export default function Inventory() {
                             <Button
                               size="sm"
                               onClick={handleSaveEdit}
-                              className="bg-[rgba(201,168,76,0.1)] text-gold border border-[rgba(201,168,76,0.3)] hover:bg-[rgba(201,168,76,0.2)] h-7 w-7 p-0"
+                              className="bg-[rgba(209,112,79,0.1)] text-gold border border-[rgba(194,90,58,0.3)] hover:bg-[rgba(209,112,79,0.2)] h-7 w-7 p-0"
                             >
                               <Save className="w-3.5 h-3.5" />
                             </Button>
@@ -647,7 +647,7 @@ export default function Inventory() {
                               size="sm"
                               variant="ghost"
                               onClick={() => setEditingProduct(null)}
-                              className="text-[#888] hover:text-white hover:bg-[rgba(255,255,255,0.07)] text-[12px] h-7 px-2"
+                              className="text-[#6b7681] hover:text-gold hover:bg-[rgba(209,112,79,0.1)] text-[12px] h-7 px-2"
                             >
                               Cancel
                             </Button>
@@ -658,7 +658,7 @@ export default function Inventory() {
                               size="sm"
                               variant="ghost"
                               onClick={() => handleEditProduct(product)}
-                              className="text-[#666] hover:text-gold hover:bg-[rgba(201,168,76,0.1)] h-7 w-7 p-0"
+                              className="text-[#6b7681] hover:text-gold hover:bg-[rgba(209,112,79,0.1)] h-7 w-7 p-0"
                             >
                               <Pencil className="w-3.5 h-3.5" />
                             </Button>
@@ -666,7 +666,7 @@ export default function Inventory() {
                               size="sm"
                               variant="ghost"
                               onClick={() => handleDeleteProduct(product.id)}
-                              className="text-[#666] hover:text-red-400 hover:bg-[rgba(239,68,68,0.08)] h-7 w-7 p-0"
+                              className="text-[#6b7681] hover:text-red-400 hover:bg-[rgba(239,68,68,0.08)] h-7 w-7 p-0"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                             </Button>
@@ -728,16 +728,16 @@ export default function Inventory() {
                           handleOrderDetailsDialogClick(reservation.id)
                         }
                       >
-                        <TableCell className="text-[13px] text-white text-left ">
+                        <TableCell className="text-[13px] text-text-main text-left ">
                           {reservation.user_name}
                         </TableCell>
-                        <TableCell className="text-[13px] text-white text-left ">
+                        <TableCell className="text-[13px] text-text-main text-left ">
                           {reservation.customer_name}
                         </TableCell>
-                        <TableCell className="text-[13px] text-[#aaa] text-left ">
+                        <TableCell className="text-[13px] text-[#6b7681] text-left ">
                           {reservation.email}
                         </TableCell>
-                        <TableCell className="text-[13px] text-[#aaa] text-left ">
+                        <TableCell className="text-[13px] text-[#6b7681] text-left ">
                           {reservation.phone}
                         </TableCell>
                         <TableCell className="text-[13px] text-gold font-semibold font-serif-app text-left ">
@@ -799,10 +799,10 @@ export default function Inventory() {
                           key={request.id}
                           className="border-b border-[rgba(201,168,76,0.08)] hover:bg-[rgba(201,168,76,0.03)]"
                         >
-                          <TableCell className="text-[13px] text-white text-left">
+                          <TableCell className="text-[13px] text-text-main text-left">
                             {request?.item_name || "Unknown"}
                           </TableCell>
-                          <TableCell className="text-[13px] text-[#aaa] text-left">
+                          <TableCell className="text-[13px] text-[#6b7681] text-left">
                             {request.email}
                           </TableCell>
                           <TableCell className="text-[13px] text-[#888] text-left">
