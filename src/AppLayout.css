@@ -1,0 +1,102 @@
+/* ================================================================
+   PRODUCTS LAYOUT — Dark Gold Theme Shell
+   Scoped under .rl-layout (applied to SidebarProvider wrapper)
+   ================================================================ */
+
+.rl-layout {
+  background: #080808;
+  color: #e5e5e5;
+  min-height: 100svh;
+  font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+}
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+
+/* Sidebar panel */
+.rl-layout [data-slot="sidebar"] {
+  background: #0a0a0a !important;
+  border-right: 1px solid rgba(201, 168, 76, 0.18) !important;
+}
+
+/* Sidebar menu buttons (nav links) */
+.rl-layout [data-slot="sidebar-menu-button"] {
+  color: #777 !important;
+  border-radius: 6px;
+  transition: color 0.28s ease, background 0.28s ease;
+}
+
+.rl-layout [data-slot="sidebar-menu-button"]:hover {
+  background: rgba(201, 168, 76, 0.07) !important;
+  color: #c9a84c !important;
+}
+
+.rl-layout [data-slot="sidebar-menu-button"][data-active="true"] {
+  background: rgba(201, 168, 76, 0.12) !important;
+  color: #c9a84c !important;
+}
+
+.rl-layout [data-slot="sidebar-menu-button"] svg {
+  color: inherit !important;
+}
+
+/* Sidebar footer */
+.rl-layout [data-slot="sidebar-footer"] {
+  border-top: 1px solid rgba(201, 168, 76, 0.12) !important;
+}
+
+/* Sidebar trigger (hamburger toggle) */
+.rl-layout [data-slot="sidebar-trigger"] {
+  color: #666 !important;
+  background: transparent !important;
+}
+.rl-layout [data-slot="sidebar-trigger"]:hover {
+  color: #c9a84c !important;
+  background: rgba(201, 168, 76, 0.07) !important;
+}
+
+/* ================================================================
+   HEADER BAR
+   ================================================================ */
+
+.rl-app-header {
+  background: rgba(6, 6, 6, 0.96) !important;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.18) !important;
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  height: 64px;
+}
+
+/* Brand icon (Wine) */
+.rl-layout .rl-brand-icon {
+  color: #c9a84c !important;
+}
+
+/* Brand title text */
+.rl-layout .rl-brand-title {
+  color: #c9a84c !important;
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.8px !important;
+}
+
+/* Cart icon area */
+.rl-layout .rl-cart-icon {
+  color: #888;
+  cursor: pointer;
+  transition: color 0.28s ease;
+}
+.rl-layout .rl-cart-icon:hover {
+  color: #c9a84c;
+}
+
+/* ================================================================
+   MAIN CONTENT AREA
+   ================================================================ */
+
+.rl-app-main {
+  background: #080808;
+  color: #e5e5e5;
+}

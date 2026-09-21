@@ -1,0 +1,84 @@
+/* ================================================================
+   BEER GLASS FILL SPINNER
+   ================================================================ */
+
+.wsp-wrap {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Beer liquid — anchored at bottom, grows upward */
+.wsp-liquid {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: wsp-fill 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes wsp-fill {
+  0%   { transform: scaleY(0);    }
+  66%  { transform: scaleY(0.84); }
+  81%  { transform: scaleY(0.84); }
+  96%  { transform: scaleY(0);    }
+  100% { transform: scaleY(0);    }
+}
+
+/* Foam head — thin sliver at start, thickens as beer rises */
+/* Pivot is the BOTTOM of the foam group (y≈62 in SVG space).  */
+/* translateY(90px)  → bottom sits at glass floor (y=152)       */
+/* translateY(-21px) → bottom sits at beer surface when full    */
+.wsp-foam-group {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: wsp-foam 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
+@keyframes wsp-foam {
+  /* Thin sliver rides the beer surface from the very beginning */
+  0%   { transform: translateY(90px)  scaleY(0.05); opacity: 1;   }
+  /* Foam grows exactly with the beer — bottom locked to beer surface */
+  66%  { transform: translateY(-21px) scaleY(1.0);  opacity: 1;   }
+  /* Gentle bob — foam crown visible above the rim (overflow from open-top clip) */
+  74%  { transform: translateY(-23px) scaleY(1.0);  opacity: 1;   }
+  80%  { transform: translateY(-21px) scaleY(1.0);  opacity: 1;   }
+  85%  { transform: translateY(-22px) scaleY(1.0);  opacity: 1;   }
+  90%  { transform: translateY(-21px) scaleY(1.0);  opacity: 1;   }
+  /* Drain — foam sinks and fades with the beer */
+  96%  { transform: translateY(90px)  scaleY(0.05); opacity: 0;   }
+  100% { transform: translateY(90px)  scaleY(0.05); opacity: 0;   }
+}
+
+/* Rising bubbles — staggered independent loops */
+.wsp-b {
+  animation: wsp-bubble 1.7s ease-in infinite;
+}
+.wsp-b1 { animation-delay: 0.00s; animation-duration: 1.80s; }
+.wsp-b2 { animation-delay: 0.38s; animation-duration: 2.00s; }
+.wsp-b3 { animation-delay: 0.75s; animation-duration: 1.70s; }
+.wsp-b4 { animation-delay: 1.15s; animation-duration: 2.20s; }
+.wsp-b5 { animation-delay: 0.55s; animation-duration: 1.60s; }
+
+@keyframes wsp-bubble {
+  0%   { transform: translateY(0);      opacity: 0;    }
+  7%   { opacity: 0.85; }
+  82%  { transform: translateY(-118px); opacity: 0;    }
+  83%  { transform: translateY(0);      opacity: 0;    }
+  100% { transform: translateY(0);      opacity: 0;    }
+}
+
+/* Label */
+.wsp-label {
+  font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #c9a84c;
+  margin: 0;
+  animation: wsp-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes wsp-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}

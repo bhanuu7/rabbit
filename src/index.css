@@ -5,9 +5,9 @@
 
 @custom-variant dark (&:is(.dark *));
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
+  --text: #3a424b;
+  --text-h: #2d333a;
+  --bg: #f3ebda;
   --border: oklch(0.922 0 0);
   --code-bg: #f4f3ec;
   --accent: oklch(0.97 0 0);
@@ -98,9 +98,9 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
+    --text: #3a424b;
+    --text-h: #2d333a;
+    --bg: #f3ebda;
     --border: #2e303a;
     --code-bg: #1f2028;
     --accent: #c084fc;
@@ -218,6 +218,33 @@ code {
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
   --variant-dark: (.dark &);
+
+  /* Custom app tokens */
+  --color-gold: #c25a3a;
+  --color-gold-light: #d97a5c;
+  --color-gold-dark: #a8461f;
+  --color-bg-base: #f3ebda;
+  --color-bg-card: #fbf5ea;
+  --color-bg-card2: #f6eedf;
+  --color-text-main: #3a424b;
+  --color-text-muted-app: #6b7681;
+  --color-text-dim: #8a94a0;
+  --color-cream: #f5f0e8;
+  --font-serif-app: 'Georgia', 'Times New Roman', serif;
+  --font-sans-app: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+
+  /* Custom animations */
+  --animate-wsp-fill: wsp-fill 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  --animate-wsp-foam: wsp-foam 3.2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  --animate-wsp-pulse: wsp-pulse 3.2s ease-in-out infinite;
+  --animate-wsp-bubble: wsp-bubble 1.7s ease-in infinite;
+  --animate-av-enter: av-enter 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-lp-spin: lp-spin 0.7s linear infinite;
+  --animate-rl-float: rl-float-splash 6s ease-in-out infinite;
+  --animate-rl-pulse: rl-pulse 2s ease-in-out infinite;
+  --animate-rl-fadein: rl-fadein 0.25s ease;
+  --animate-pp-shimmer: pp-shimmer 1.4s ease infinite;
+  --animate-pp-dd-in: pp-dd-in 0.16s ease;
 }
 
 .dark {
@@ -264,4 +291,332 @@ code {
   html {
     @apply font-sans;
   }
+}
+
+/* ================================================================
+   KEYFRAMES — All custom animations
+   ================================================================ */
+
+/* WhiskeySpinner — beer fill */
+@keyframes wsp-fill {
+  0%   { transform: scaleY(0);    }
+  66%  { transform: scaleY(0.84); }
+  81%  { transform: scaleY(0.84); }
+  96%  { transform: scaleY(0);    }
+  100% { transform: scaleY(0);    }
+}
+
+/* WhiskeySpinner — foam */
+@keyframes wsp-foam {
+  0%   { transform: translateY(90px)  scaleY(0.05); opacity: 1;   }
+  66%  { transform: translateY(-21px) scaleY(1.0);  opacity: 1;   }
+  74%  { transform: translateY(-23px) scaleY(1.0);  opacity: 1;   }
+  80%  { transform: translateY(-21px) scaleY(1.0);  opacity: 1;   }
+  85%  { transform: translateY(-22px) scaleY(1.0);  opacity: 1;   }
+  90%  { transform: translateY(-21px) scaleY(1.0);  opacity: 1;   }
+  96%  { transform: translateY(90px)  scaleY(0.05); opacity: 0;   }
+  100% { transform: translateY(90px)  scaleY(0.05); opacity: 0;   }
+}
+
+/* WhiskeySpinner — bubbles */
+@keyframes wsp-bubble {
+  0%   { transform: translateY(0);      opacity: 0;    }
+  7%   { opacity: 0.85; }
+  82%  { transform: translateY(-118px); opacity: 0;    }
+  83%  { transform: translateY(0);      opacity: 0;    }
+  100% { transform: translateY(0);      opacity: 0;    }
+}
+
+/* WhiskeySpinner — label pulse */
+@keyframes wsp-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}
+
+/* AgeVerification — card entrance */
+@keyframes av-enter {
+  from { opacity: 0; transform: translateY(22px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* LoginPage — button spinner */
+@keyframes lp-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* HomePage — hero splash float */
+@keyframes rl-float-splash {
+  0%   { transform: translateY(-50%) scale(1); }
+  50%  { transform: translateY(-52%) scale(1.02); }
+  100% { transform: translateY(-50%) scale(1); }
+}
+
+/* HomePage — hero pill pulse */
+@keyframes rl-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+/* HomePage — range card CTA fade */
+@keyframes rl-fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ProductsPage — skeleton shimmer */
+@keyframes pp-shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+
+/* ProductsPage — dropdown entrance */
+@keyframes pp-dd-in {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================================
+   UTILITY COMPONENTS — Complex patterns that can't be pure utilities
+   ================================================================ */
+
+/* Scrollbar hiding for carousels */
+.scrollbar-hide {
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Thin gold scrollbar */
+.scrollbar-gold {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(201,168,76,0.25) transparent;
+}
+.scrollbar-gold::-webkit-scrollbar { height: 3px; }
+.scrollbar-gold::-webkit-scrollbar-thumb {
+  background: rgba(201,168,76,0.25);
+  border-radius: 4px;
+}
+
+/* BottleSVG sizing & glow */
+.bottle-svg {
+  width: 64px;
+  height: 155px;
+  filter: drop-shadow(0 6px 22px rgba(201, 168, 76, 0.25));
+  transition: filter 0.28s ease;
+}
+.group:hover .bottle-svg {
+  filter: drop-shadow(0 8px 28px rgba(201, 168, 76, 0.4));
+}
+
+/* Glass SVG (Range cards) — responsive sizing handled by parent */
+.glass-svg {
+  width: 100%;
+  height: 100%;
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+.group:hover .glass-svg {
+  filter: drop-shadow(0 6px 18px var(--cat-accent, #c9a84c));
+  transform: translateY(-4px);
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* ================================================================
+   RABBIT LIQUOR — Hero CSS Variables & Classes (App.css reference)
+   ================================================================ */
+
+:root {
+  --gold:           #c25a3a;
+  --gold-light:     #d97a5c;
+  --gold-dark:      #a8461f;
+  --bg-base:        #f3ebda;
+  --bg-card:        #fbf5ea;
+  --bg-card2:       #f6eedf;
+  --rl-border:      rgba(45, 51, 58, 0.14);
+  --border-hover:   rgba(194, 90, 58, 0.45);
+  --text-muted:     #6b7681;
+  --text-dim:       #8a94a0;
+  --font-serif:     'Georgia', 'Times New Roman', serif;
+  --font-sans-rl:   'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+  --rl-radius:      6px;
+  --rl-transition:  0.28s ease;
+}
+
+/* Buttons */
+.rl-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 20px;
+  font-size: 13px;
+  font-family: var(--font-sans-rl);
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  border-radius: var(--rl-radius);
+  cursor: pointer;
+  transition: all var(--rl-transition);
+  white-space: nowrap;
+  border: none;
+}
+.rl-btn--gold {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+  color: #000;
+}
+.rl-btn--gold:hover {
+  background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(201, 168, 76, 0.3);
+}
+.rl-btn--outline {
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+}
+.rl-btn--outline:hover {
+  background: rgba(201, 168, 76, 0.08);
+  transform: translateY(-1px);
+}
+.rl-btn--lg { padding: 14px 34px; font-size: 14px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* Gold italic text */
+.rl-gold { color: var(--gold); font-style: italic; }
+
+/* Hero */
+.rl-hero {
+  position: relative;
+  min-height: 56vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: #000000;
+  border-bottom: 1px solid var(--rl-border);
+}
+
+.rl-hero-splash-wrap {
+  position: absolute;
+  right: 12%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: min(48vw, 420px);
+  pointer-events: none;
+  z-index: 2;
+  animation: rl-float-splash 6s ease-in-out infinite;
+}
+
+.rl-hero-splash-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.rl-hero__content {
+  position: relative;
+  z-index: 10;
+  padding: 52px 64px;
+  max-width: 580px;
+}
+
+.rl-hero__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 50px;
+  padding: 5px 14px;
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+
+.rl-hero__pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  flex-shrink: 0;
+  animation: rl-pulse 2s ease-in-out infinite;
+}
+
+.rl-hero__title {
+  font-size: clamp(32px, 4.2vw, 58px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: #fff;
+  font-family: var(--font-serif);
+  margin-bottom: 16px;
+}
+
+.rl-hero__desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.75;
+  max-width: 420px;
+  margin-bottom: 28px;
+}
+
+.rl-hero__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.rl-hero__stats {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.rl-stat { display: flex; flex-direction: column; gap: 2px; }
+.rl-stat__num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  font-family: var(--font-serif);
+  line-height: 1;
+}
+.rl-stat__label {
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+.rl-stat__divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(201, 168, 76, 0.24);
+  flex-shrink: 0;
+}
+
+/* Hero responsive */
+@media (max-width: 1024px) {
+  .rl-hero__content { padding: 40px 28px; }
+  .rl-hero-splash-wrap { right: 8%; width: min(40vw, 420px); }
+}
+@media (max-width: 768px) {
+  .rl-hero { min-height: auto; align-items: flex-start; }
+  .rl-hero__content { padding: 52px 22px 36px; max-width: 100%; }
+  .rl-hero__title { font-size: 30px; }
+  .rl-hero-splash-wrap { opacity: 0.9; right: 4%; width: min(40vw, 320px); }
+  .rl-hero__stats { gap: 14px; }
+  .rl-stat__num { font-size: 18px; }
+  .rl-hero__actions { gap: 10px; }
+  .rl-btn--lg { padding: 12px 22px; font-size: 13px; }
+}
+@media (max-width: 480px) {
+  .rl-hero__title { font-size: 24px; }
+  .rl-hero__stats { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .rl-stat__divider { display: none; }
+  .rl-hero-splash-wrap { opacity: 0.8; right: 0; width: min(40vw, 240px); }
 }
