@@ -40,7 +40,7 @@ jobs:
       # 6. Upload build to S3
       - name: Deploy to S3
         run: |
-          aws s3 sync dist/ s3://rabbit-liquor-assets --delete
+          aws s3 sync dist/ s3://rabbit-liquor-build --delete
 
       # 7. Clear CloudFront cache
       - name: Invalidate CloudFront
