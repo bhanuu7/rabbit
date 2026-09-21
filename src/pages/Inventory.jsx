@@ -71,10 +71,10 @@ export default function Inventory() {
   const [newProduct, setNewProduct] = useState({
     name: "",
     category: "",
-    price: 0,
+    price: null,
     description: "",
     image: "",
-    stock: 0,
+    stock: null,
     alcoholContent: "",
     volume: "",
     origin: "",
@@ -404,16 +404,12 @@ export default function Inventory() {
                       </Label>
                       <Input
                         type={type}
-                        step={type === "number" ? "0.01" : undefined}
                         placeholder={placeholder}
                         value={newProduct[key]}
                         onChange={(e) =>
                           setNewProduct({
                             ...newProduct,
-                            [key]:
-                              type === "number"
-                                ? parseFloat(e.target.value) || 0
-                                : e.target.value,
+                            [key]: e.target.value,
                           })
                         }
                         className="bg-[rgba(45,51,58,0.04)] border-[rgba(45,51,58,0.16)] text-text-main focus-visible:ring-0 focus-visible:border-gold text-[13px] placeholder:text-text-dim font-sans-app"
@@ -587,7 +583,6 @@ export default function Inventory() {
                         {editingProduct?.id === product.id ? (
                           <Input
                             type="number"
-                            step="0.01"
                             value={editingProduct.price}
                             onChange={(e) =>
                               setEditingProduct({
