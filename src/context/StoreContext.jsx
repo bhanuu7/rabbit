@@ -1,13 +1,60 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { products as initialProducts } from "@/utils";
 import axios from "axios";
+import { getProducts } from "@/api/getProducts";
+import { getUrl } from "aws-amplify/storage";
 const StoreContext = createContext(undefined);
 
 export function StoreProvider({ children }) {
-  const [products, setProducts] = useState(() => {
-    const saved = localStorage.getItem("liquor-store-products");
-    return saved ? JSON.parse(saved) : initialProducts;
-  });
+  const { data = [], isLoading, error } = getProducts();
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    const loadImageUrls = async () => {
+      if (!data?.length) {
+        setProducts([]);
+        return;
+      }
+
+      const enrichedProducts = await Promise.all(
+        data.map(async (product) => {
+          try {
+            if (!product.image_url) {
+              return {
+                ...product,
+                imageSignedUrl: null,
+              };
+            }
+
+            const result = await getUrl({
+              path: product.image_url,
+              options: {
+                expiresIn: 3600,
+              },
+            });
+
+            return {
+              ...product,
+              imageSignedUrl: result.url.toString(),
+            };
+          } catch (err) {
+            console.error(
+              `Failed to get image URL for product ${product.id}`,
+              err,
+            );
+
+            return {
+              ...product,
+              imageSignedUrl: null,
+            };
+          }
+        }),
+      );
+
+      setProducts(enrichedProducts);
+    };
+    loadImageUrls();
+  }, [data]);
 
   const [reservations, setReservations] = useState(() => {
     const saved = localStorage.getItem("liquor-store-reservations");
@@ -87,6 +134,7 @@ export function StoreProvider({ children }) {
 
   const deleteProduct = (productId) => {
     setProducts((prev) => prev.filter((p) => p.id !== productId));
+    axios.delete(`${import.meta.env.VITE_BASE_URL}/products/${productId}`);
   };
 
   const addProduct = (product) => {
@@ -99,7 +147,8 @@ export function StoreProvider({ children }) {
       stock_count: product.stock,
       price: product.price,
       category: product.category,
-      image_url: product.image_url,
+      image_url: product.image,
+      abv: product.alcoholContent,
     });
     setProducts((prev) => [...prev, newProduct]);
   };
@@ -108,6 +157,7 @@ export function StoreProvider({ children }) {
     <StoreContext.Provider
       value={{
         products,
+        setProducts,
         reservations,
         notifyRequests,
         updateProductStock,
@@ -116,6 +166,7 @@ export function StoreProvider({ children }) {
         updateProduct,
         deleteProduct,
         addProduct,
+        isLoading,
       }}
     >
       {children}

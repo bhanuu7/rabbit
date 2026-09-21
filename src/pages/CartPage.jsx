@@ -145,7 +145,7 @@ function CartPage() {
     setFormData({ name: "", email: "", phone: "" });
     clearCart();
     setCheckoutOpen(false);
-    navigate("/home");
+    navigate("/");
   };
 
   /* ── Empty state ─────────────────────────────────────────── */

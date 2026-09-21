@@ -51,7 +51,7 @@ export default function Header() {
       {/* LEFT — Brand + Nav */}
       <div className="flex items-center gap-4 min-w-0 overflow-hidden">
         <button
-          onClick={() => navigate("/home")}
+          onClick={() => navigate("/")}
           className="flex items-center gap-2.5 bg-transparent border-none cursor-pointer p-0 shrink-0"
         >
           <img
@@ -65,8 +65,8 @@ export default function Header() {
         </button>
         <div className="flex items-center gap-0.5 max-lg:hidden shrink-0">
           <button
-            onClick={() => navigate("/home")}
-            className={`${navLinkBase} ${pathname === "/home" ? navLinkActive : ""}`}
+            onClick={() => navigate("/")}
+            className={`${navLinkBase} ${pathname === "/" ? navLinkActive : ""}`}
           >
             Home
           </button>
@@ -77,7 +77,7 @@ export default function Header() {
             Reserve
           </button>
           <button
-            onClick={() => navigate("/home?page=story")}
+            onClick={() => navigate("/?page=story")}
             className={navLinkBase}
           >
             About Us
@@ -86,7 +86,10 @@ export default function Header() {
       </div>
 
       {/* CENTER — Search */}
-      <form onSubmit={submitSearch} className="flex justify-center max-md:hidden">
+      <form
+        onSubmit={submitSearch}
+        className="flex justify-center max-md:hidden"
+      >
         <div className="flex items-center gap-2 bg-[rgba(45,51,58,0.04)] border border-[rgba(45,51,58,0.16)] rounded-full py-[7px] px-[18px] w-[240px] transition-all duration-[280ms] focus-within:border-gold focus-within:bg-[rgba(45,51,58,0.06)]">
           <button
             type="submit"

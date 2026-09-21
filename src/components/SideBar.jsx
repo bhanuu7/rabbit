@@ -25,7 +25,7 @@ import { toast } from "sonner";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const navItems = [
-  { title: "Home", url: "/home", icon: Home },
+  { title: "Home", url: "/", icon: Home },
   { title: "Products", url: "/products", icon: Wine },
   { title: "Inventory", url: "/inventory", icon: Beer },
   { title: "Customers", url: "/customers", icon: Users },

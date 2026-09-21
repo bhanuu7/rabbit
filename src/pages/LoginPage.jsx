@@ -42,11 +42,11 @@ export default function LoginPage() {
         const { isSignedIn } = await signIn({ username: email, password });
         if (isSignedIn) {
           toast.success("Welcome back!", { position: "top-center" });
-          navigate("/home");
+          navigate("/");
         }
       } catch (error) {
         if (error.name === "UserAlreadyAuthenticatedException") {
-          navigate("/home");
+          navigate("/");
         } else {
           toast.error(error.message || "Login failed", {
             position: "top-center",
@@ -111,7 +111,7 @@ export default function LoginPage() {
           toast.success("Welcome to Rabbit Liquor!", {
             position: "top-center",
           });
-          navigate("/home");
+          navigate("/");
         }
       } catch (error) {
         toast.error(error.message || "Verification failed", {

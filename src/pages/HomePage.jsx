@@ -1,24 +1,14 @@
 import "./HomePage.css";
 import { useState } from "react";
-import { Wine, Search } from "lucide-react";
-import { Input } from "@/components/ui/input";
 import { getProducts } from "@/api/getProducts";
 import { useCart } from "@/context/CartContext";
-import { ProductCard } from "@/components/ProductCard";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../components/ui/select";
 import { reserveProduct } from "@/api/reserveProduct";
 import { useInventorySocket } from "@/hooks/useInventerySocket";
 import { useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import BottleSVG, { CATEGORY_FALLBACK } from "@/components/BottleSVG";
 import siteLogo from "@/assets/Site_Logo.png";
-import { products as REAL_PRODUCTS } from "@/utils";
+import { useStore } from "@/context/StoreContext";
 
 /* ================================================================
    SVG GLASS COMPONENTS
@@ -974,63 +964,199 @@ function TrendingCard({ product }) {
   const count = getProductCount ? getProductCount(product.id) : 0;
 
   return (
-    <div className="group flex-[0_0_215px] bg-[#fbf5ea] border border-[rgba(45,51,58,0.12)] rounded-xl overflow-hidden transition-all duration-[280ms] cursor-pointer hover:border-[rgba(209,112,79,0.5)] hover:-translate-y-2 hover:shadow-[0_18px_44px_rgba(209,112,79,0.12)] max-[480px]:flex-[0_0_180px]">
-      <div className="relative h-[210px] bg-gradient-to-br from-[#f6eedf] to-[#ece1cd] flex items-center justify-center">
-        <span className="absolute top-3 left-3 bg-[rgba(209,112,79,0.12)] border border-[rgba(209,112,79,0.3)] text-[#c25a3a] text-[9px] tracking-[1.5px] py-[3px] px-2.5 rounded-full uppercase">
+    <article
+      className="
+      group
+    flex
+    min-w-0
+    flex-1
+    basis-[180px]
+    flex-col
+    overflow-hidden
+    rounded-xl
+    border border-[rgba(45,51,58,0.12)]
+    bg-[#fbf5ea]
+    transition-all duration-[280ms]
+    cursor-pointer
+    hover:-translate-y-2
+    hover:border-[rgba(209,112,79,0.5)]
+    hover:shadow-[0_18px_44px_rgba(209,112,79,0.12)]
+    max-[480px]:flex-[0_0_180px]
+    sm:basis-0
+    lg:basis-0
+    "
+    >
+      {/* Fixed-size image section */}
+      <div
+        className="
+        relative flex h-[245px] shrink-0
+        items-center justify-center
+        overflow-hidden
+        bg-gradient-to-br from-[#f6eedf] to-[#ece1cd]
+        p-4
+        sm:h-[260px]
+        lg:h-[275px]
+      "
+      >
+        <span
+          className="
+    absolute left-2 top-2 z-10
+    max-w-[calc(100%-16px)]
+    truncate
+    rounded-full
+    border border-[#d1704f4d]
+    bg-[#d1704f1f]
+    px-2 py-1
+    text-[8px] font-semibold uppercase
+    leading-none tracking-[0.8px]
+    text-[#c25a3a]
+    sm:left-3 sm:top-3
+    sm:max-w-[calc(100%-24px)]
+    sm:px-2.5 sm:py-1
+    sm:text-[9px]
+    sm:tracking-[1px]
+    lg:text-[10px]
+    lg:tracking-[1.2px]
+  "
+        >
           {product.category}
         </span>
-        {!imgError && product.image_url ? (
+
+        {!imgError && product.imageSignedUrl ? (
           <img
-            src={product.image_url}
+            src={product.imageSignedUrl}
             alt={product.item_name}
-            className="w-full h-full object-cover block"
+            loading="lazy"
+            className="
+            h-full w-full object-contain
+            transition-transform duration-500
+            group-hover:scale-105
+          "
             onError={() => setImgError(true)}
           />
         ) : (
-          <BottleSVG
-            color={fallback.color}
-            label={product.category.toUpperCase()}
-            isBeer={fallback.isBeer}
-          />
+          <div className="flex h-full w-full items-center justify-center">
+            <BottleSVG
+              color={fallback.color}
+              label={product.category.toUpperCase()}
+              isBeer={fallback.isBeer}
+            />
+          </div>
         )}
       </div>
-      <div className="p-4">
-        <h3 className="text-sm font-semibold text-[#2d333a] font-serif-app leading-[1.3] mb-[5px]">
-          {product.item_name}
-        </h3>
-        <p className="text-[11px] text-[#8a94a0] mb-[9px]">
-          {product.origin} · {product.category}
-        </p>
-        <div className="text-[#c25a3a] text-xs flex items-center gap-[5px] mb-[13px]">
-          {"★★★★★"}
-          <span className="text-[11px] text-[#6b7681]">
-            {product.rating || 4.8}
-          </span>
+
+      {/* Fixed-size content section */}
+      <div
+        className="
+        flex min-h-0 flex-1 flex-col
+        bg-[#fffaf2]
+        p-4
+        sm:p-5
+      "
+      >
+        {/* Fixed title area */}
+        <div className="h-[66px] shrink-0 overflow-hidden">
+          <p
+            className="
+            line-clamp-2
+            text-center
+            text-sm font-semibold leading-[1.35]
+            text-[#2d333a]
+            font-serif-app
+            sm:text-base
+          "
+            title={product.item_name}
+          >
+            {product.item_name}
+          </p>
         </div>
-        <div className="flex items-center justify-between">
-          <span className="text-[19px] font-bold text-[#c25a3a] font-serif-app">
+
+        {/* Always stays at the bottom */}
+        <div className="mt-auto align-left" style={{ border: "2px solid red" }}>
+          abv
+        </div>
+        <div
+          className="
+          mt-auto flex min-h-10
+          items-center justify-between gap-2
+        "
+        >
+          <span
+            className="
+            whitespace-nowrap
+            text-lg font-bold text-[#c25a3a]
+            font-serif-app
+            sm:text-xl
+          "
+          >
             ${Number(product.price).toFixed(2)}
           </span>
+
           {count === 0 ? (
             <button
-              className="bg-transparent border border-[#d1704f] text-[#c25a3a] py-[5px] px-3 rounded-md text-[11px] cursor-pointer transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(209,112,79,0.12)]"
+              type="button"
+              aria-label={`Add ${product.item_name} to cart`}
+              className="
+              inline-flex h-10 shrink-0
+              items-center justify-center
+              rounded-lg border border-[#d1704f]
+              px-3 text-xs font-semibold
+              text-[#c25a3a]
+              transition-all duration-200
+              hover:bg-[#d1704f1f]
+              focus:outline-none
+              focus:ring-2 focus:ring-[#d1704f80]
+              focus:ring-offset-2
+              focus:ring-offset-[#fffaf2]
+              active:scale-95
+              sm:px-4
+            "
               onClick={() => addToCart?.(product)}
             >
-              + Add
+              <span className="mr-1 text-base leading-none">+</span>
+              Add
             </button>
           ) : (
-            <div className="flex items-center gap-1 border border-[rgba(209,112,79,0.4)] rounded-md overflow-hidden">
+            <div
+              className="
+              flex h-10 shrink-0
+              items-center overflow-hidden
+              rounded-lg
+              border border-[#d1704f66]
+              bg-[#fffaf2]
+            "
+            >
               <button
-                className="bg-transparent border-none text-[#c25a3a] w-[26px] h-[26px] text-[15px] cursor-pointer flex items-center justify-center transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(209,112,79,0.12)]"
+                type="button"
+                aria-label={`Remove one ${product.item_name}`}
+                className="
+                flex h-full w-8 items-center justify-center
+                text-lg leading-none text-[#c25a3a]
+                transition-colors hover:bg-[#d1704f1f]
+                focus:outline-none
+                focus:ring-2 focus:ring-inset
+                focus:ring-[#d1704f80]
+              "
                 onClick={() => removeFromCart?.(product)}
               >
                 −
               </button>
-              <span className="min-w-[20px] text-center text-xs font-semibold text-[#c25a3a]">
+
+              <span className="min-w-7 text-center text-xs font-bold text-[#2d333a]">
                 {count}
               </span>
+
               <button
-                className="bg-transparent border-none text-[#c25a3a] w-[26px] h-[26px] text-[15px] cursor-pointer flex items-center justify-center transition-colors duration-[280ms] font-sans-app hover:bg-[rgba(209,112,79,0.12)]"
+                type="button"
+                aria-label={`Add another ${product.item_name}`}
+                className="
+                flex h-full w-8 items-center justify-center
+                text-lg leading-none text-[#c25a3a]
+                transition-colors hover:bg-[#d1704f1f]
+                focus:outline-none
+                focus:ring-2 focus:ring-inset
+                focus:ring-[#d1704f80]
+              "
                 onClick={() => addToCart?.(product)}
               >
                 +
@@ -1039,7 +1165,7 @@ function TrendingCard({ product }) {
           )}
         </div>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -1129,51 +1255,6 @@ function TrendingSection({ data }) {
             </svg>
           </button>
         )}
-      </div>
-    </section>
-  );
-}
-
-/* ================================================================
-   REVIEWS
-   ================================================================ */
-
-function ReviewsSection() {
-  return (
-    <section
-      className="py-[100px] px-16 bg-[linear-gradient(180deg,#f3ebda,#ece1cd,#f3ebda)] border-t border-[rgba(45,51,58,0.12)] max-lg:py-20 max-lg:px-8 max-md:py-16 max-md:px-[22px]"
-      id="reviews"
-    >
-      <div className="text-center mb-[52px] px-6">
-        <p className="text-[#c25a3a] text-[10px] tracking-[4px] uppercase mb-3 opacity-85">
-          TESTIMONIALS
-        </p>
-        <h2 className="text-[clamp(26px,3.5vw,44px)] font-bold text-[#2d333a] font-serif-app mb-2.5">
-          What Our <span className="text-[#c25a3a] italic">Connoisseurs</span> Say
-        </h2>
-      </div>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-[22px] max-w-[1200px] mx-auto max-md:grid-cols-1">
-        {REVIEWS.map((r) => (
-          <div
-            key={r.id}
-            className="bg-[#fbf5ea] border border-[rgba(45,51,58,0.12)] rounded-xl py-[34px] px-[30px] relative transition-all duration-[280ms] hover:border-[rgba(209,112,79,0.38)] hover:-translate-y-[5px] hover:shadow-[0_14px_36px_rgba(209,112,79,0.1)] before:content-['\u201c'] before:absolute before:top-3 before:right-[22px] before:text-[88px] before:text-[rgba(209,112,79,0.12)] before:font-serif-app before:leading-none before:pointer-events-none"
-          >
-            <div className="text-[#c25a3a] text-[15px] tracking-[2px] mb-4">
-              {"★".repeat(r.rating)}
-            </div>
-            <p className="text-sm text-[#5c6670] leading-[1.85] font-serif-app italic mb-[22px]">
-              "{r.text}"
-            </p>
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#d1704f] to-[#b8542f] text-white font-bold text-base flex items-center justify-center shrink-0">
-                {r.avatar}
-              </div>
-              <span className="text-[13px] font-semibold text-[#2d333a]">
-                {r.name}
-              </span>
-            </div>
-          </div>
-        ))}
       </div>
     </section>
   );
@@ -1557,19 +1638,10 @@ function SiteFooter() {
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { products } = useStore();
   const page = searchParams.get("page") || "home";
-  const setPage = (p) => {
-    if (p === "home") setSearchParams({}, { replace: true });
-    else setSearchParams({ page: p }, { replace: true });
-  };
-  const { addToCart } = useCart();
-  const [searchQuery, setSearchQuery] = useState("");
-  const { data = [], isLoading, error } = getProducts();
   const { mutate, isPending } = reserveProduct();
   useInventorySocket();
-  const [categoryFilter, setCategoryFilter] = useState("all");
-  const [notifyOpen, setNotifyOpen] = useState(false);
-  const categories = ["all", ...new Set(data.map((p) => p.category))];
 
   return (
     <div className="rl-app bg-[#f3ebda] text-[#3a424b] font-sans-app min-h-svh overflow-x-hidden">
@@ -1581,7 +1653,7 @@ export default function HomePage() {
         <main>
           <HeroSection />
           <RangeSection />
-          <TrendingSection data={data} />
+          <TrendingSection data={products} />
           {/* TESTIMONIALS temporarily hidden */}
           {/* <ReviewsSection /> */}
           <SiteFooter />

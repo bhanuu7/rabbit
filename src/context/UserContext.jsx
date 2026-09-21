@@ -7,6 +7,7 @@ export const UserContext = createContext({});
 export const UserProvider = ({ children }) => {
   const [username, setUsername] = useState();
   const [role, setRole] = useState();
+  const [email, setEmail] = useState();
   async function fetchUser() {
     try {
       const session = await fetchAuthSession();
@@ -16,6 +17,7 @@ export const UserProvider = ({ children }) => {
       }
       const user = await getCurrentUser();
       const userData = user.signInDetails.loginId.split("@")[0];
+      setEmail(user.signInDetails.loginId);
       const userRole =
         session.tokens.accessToken.payload.scope.split("user.")[1];
       setUsername(userData);
@@ -29,7 +31,7 @@ export const UserProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserContext.Provider value={{ username, setUsername }}>
+    <UserContext.Provider value={{ username, setUsername, email, role }}>
       {children}
     </UserContext.Provider>
   );

@@ -26,7 +26,6 @@ export const OrderDetailsDialog = ({ open, onClose, orderId }) => {
       setItems(data.items);
     }
   }, [data]);
-
   const handleIncrease = (productId) => {
     setItems((prev) =>
       prev.map((item) =>
@@ -176,7 +175,7 @@ export const OrderDetailsDialog = ({ open, onClose, orderId }) => {
             {/* Total */}
             <div className="flex justify-between border-t pt-4 font-medium">
               <span>Total</span>
-              <span>${data.total_price}</span>
+              <span>${data.bill_amount}</span>
             </div>
           </div>
         )}

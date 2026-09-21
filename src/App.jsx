@@ -11,6 +11,7 @@ import AgeVerification from "./components/AgeVerification";
 import WhiskeySpinner from "./components/WhiskeySpinner";
 import { UserProvider } from "./context/UserContext";
 import { CustomersPage } from "./pages/Customers";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
@@ -19,6 +20,7 @@ const CartPage = lazy(() => import("./pages/CartPage"));
 const OrdersPage = lazy(() => import("./pages/OrdersPage"));
 const FAQ = lazy(() => import("./pages/FAQ"));
 const ContactUs = lazy(() => import("./pages/ContactUs"));
+const PageNotFound = lazy(() => import("./pages/PageNotFound"));
 
 Amplify.configure({
   Auth: {
@@ -26,13 +28,13 @@ Amplify.configure({
       userPoolId: import.meta.env.VITE_COGNITO_USER_POOL_ID,
       userPoolClientId: import.meta.env.VITE_COGNITO_CLIENT_ID,
       region: import.meta.env.VITE_COGNITO_REGION,
-      //identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID,
+      identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID,
     },
   },
   Storage: {
     S3: {
-      bucket: "rabbit-liquor-products-images",
-      region: "ap-south-2",
+      bucket: import.meta.env.VITE_ASSETS_BUCKET,
+      region: import.meta.env.VITE_REGION,
     },
   },
 });
@@ -59,17 +61,20 @@ function App() {
               <CartProvider>
                 <Suspense fallback={<PageLoader />}>
                   <Routes>
-                    <Route path="/" element={<LoginPage />} />
-                    <Route element={<AppLayout />}>
-                      <Route path="/home" element={<HomePage />} />
-                      <Route path="/products" element={<ProductsPage />} />
-                      <Route path="/inventory" element={<Inventory />} />
-                      <Route path="/cart" element={<CartPage />} />
-                      <Route path="/orders" element={<OrdersPage />} />
-                      <Route path="/customers" element={<CustomersPage />} />
-                      <Route path="/faq" element={<FAQ />} />
-                      <Route path="/contact" element={<ContactUs />} />
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route element={<ProtectedRoute />}>
+                      <Route element={<AppLayout />}>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/products" element={<ProductsPage />} />
+                        <Route path="/inventory" element={<Inventory />} />
+                        <Route path="/cart" element={<CartPage />} />
+                        <Route path="/orders" element={<OrdersPage />} />
+                        <Route path="/customers" element={<CustomersPage />} />
+                        <Route path="/faq" element={<FAQ />} />
+                        <Route path="/contact" element={<ContactUs />} />
+                      </Route>
                     </Route>
+                    <Route path="*" element={<PageNotFound />} />
                   </Routes>
                 </Suspense>
               </CartProvider>
@@ -81,7 +86,7 @@ function App() {
   );
 }
 
-function PageLoader() {
+export function PageLoader() {
   return (
     <div className="flex items-center justify-center min-h-svh bg-bg-base">
       <WhiskeySpinner size={100} label="Loading…" />

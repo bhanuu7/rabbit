@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
 import { useStore } from "../context/StoreContext";
 import { Button } from "../components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
 } from "../components/ui/card";
@@ -48,39 +46,13 @@ import {
   Save,
   TriangleAlert,
 } from "lucide-react";
-import { getProducts } from "@/api/getProducts";
 import { getOrders } from "@/api/getOrders";
 import { OrderDetailsDialog } from "@/components/OrderDetailsDialog";
 import { updateProduct as updateProductAPI } from "@/api/updateProducts";
 import { getNotifyRequests } from "@/api/getNotifyRequests";
 import { uploadData } from "aws-amplify/storage";
 
-const uploadImage = async (file) => {
-  try {
-    const fileName = `products/${Date.now()}-${file.name}`;
-
-    const result = await uploadData({
-      path: fileName,
-      data: file,
-      options: {
-        contentType: file.type,
-      },
-    }).result;
-    // construct URL
-    const imageUrl = `https://rabbit-liquor-products-images.s3.ap-south-2.amazonaws.com/${fileName}`;
-
-    setNewProduct((prev) => ({
-      ...prev,
-      image: imageUrl,
-    }));
-  } catch (error) {
-    console.error("Upload failed", error);
-  }
-};
-
 export default function Inventory() {
-  const navigate = useNavigate();
-  const { data: productsData = [], isLoading } = getProducts();
   const { data: ordersData = [] } = getOrders();
   const { data: notifyRequests = [] } = getNotifyRequests();
   const {
@@ -109,10 +81,10 @@ export default function Inventory() {
   });
   const [preview, setPreview] = useState(null);
 
-  const outOfStockItems = Object.values(productsData).filter(
+  const outOfStockItems = Object.values(products).filter(
     (product) => product.stock_count === 0,
   );
-  const runningOutOfStockItems = Object.values(productsData).filter(
+  const runningOutOfStockItems = Object.values(products).filter(
     (product) => product.stock_count <= 5 && product.stock_count > 0,
   );
 
@@ -131,11 +103,32 @@ export default function Inventory() {
   const availableCategories = Array.from(
     new Set([
       ...FALLBACK_CATEGORIES,
-      ...Object.values(productsData)
+      ...Object.values(products)
         .map((p) => p.category)
         .filter(Boolean),
     ]),
   ).sort();
+
+  const uploadImage = async (file) => {
+    try {
+      const fileName = `products/${Date.now()}-${file.name}`;
+
+      const result = await uploadData({
+        path: fileName,
+        data: file,
+        options: {
+          contentType: file.type,
+        },
+      }).result;
+      // construct URL
+      setNewProduct((prev) => ({
+        ...prev,
+        image: fileName,
+      }));
+    } catch (error) {
+      console.error("Upload failed", error);
+    }
+  };
 
   const handleUpdateStock = (productId, newStock) => {
     updateProductStock(productId, newStock);
@@ -178,7 +171,9 @@ export default function Inventory() {
       });
       return;
     }
+    console.log(newProduct);
     addProduct(newProduct);
+    console.log("products", products);
     setAddDialogOpen(false);
     setNewProduct({
       name: "",
@@ -191,6 +186,7 @@ export default function Inventory() {
       volume: "",
       origin: "",
     });
+    setPreview("");
     toast.success("Product added successfully", { position: "top-center" });
   };
 
@@ -241,6 +237,7 @@ export default function Inventory() {
 
     // preview (optional)
     const previewUrl = URL.createObjectURL(file);
+    console.log("handle Image capture triggered", previewUrl);
     setPreview(previewUrl);
 
     // upload
@@ -260,7 +257,7 @@ export default function Inventory() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl font-bold text-[#2d333a] font-serif-app">
-              {productsData.length}
+              {products.length}
             </div>
             <p className="text-[11px] text-[#6b7681] mt-1">
               {outOfStockItems.length} out of stock
@@ -540,7 +537,7 @@ export default function Inventory() {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {productsData.map((product) => (
+                  {products.map((product) => (
                     <TableRow
                       key={product.id}
                       className="border-b border-[rgba(201,168,76,0.08)] hover:bg-[rgba(201,168,76,0.03)]"
@@ -560,9 +557,9 @@ export default function Inventory() {
                         ) : (
                           <div className="flex items-center gap-3">
                             <img
-                              src={product.image_url}
+                              src={product.imageSignedUrl}
                               alt={product.item_name}
-                              className="w-9 h-9 rounded object-cover opacity-90"
+                              className="w-9 h-9 rounded object-contain opacity-90"
                             />
                             <span className="text-[13px]">
                               {product.item_name}
@@ -693,9 +690,7 @@ export default function Inventory() {
                   <TableRow className="border-b border-[rgba(201,168,76,0.18)] hover:bg-transparent">
                     {[
                       "User Name",
-                      "Customer Name",
                       "Email",
-                      "Phone",
                       "Total Amount",
                       "Status",
                       "Date",
@@ -731,17 +726,11 @@ export default function Inventory() {
                         <TableCell className="text-[13px] text-text-main text-left ">
                           {reservation.user_name}
                         </TableCell>
-                        <TableCell className="text-[13px] text-text-main text-left ">
-                          {reservation.customer_name}
-                        </TableCell>
                         <TableCell className="text-[13px] text-[#6b7681] text-left ">
                           {reservation.email}
                         </TableCell>
-                        <TableCell className="text-[13px] text-[#6b7681] text-left ">
-                          {reservation.phone}
-                        </TableCell>
                         <TableCell className="text-[13px] text-gold font-semibold font-serif-app text-left ">
-                          {reservation.total_amount}
+                          {reservation.bill_amount}
                         </TableCell>
                         <TableCell className="text-left">
                           <FormattedBadge status={reservation.status} />
@@ -799,11 +788,11 @@ export default function Inventory() {
                           key={request.id}
                           className="border-b border-[rgba(201,168,76,0.08)] hover:bg-[rgba(201,168,76,0.03)]"
                         >
-                          <TableCell className="text-[13px] text-text-main text-left">
-                            {request?.item_name || "Unknown"}
-                          </TableCell>
                           <TableCell className="text-[13px] text-[#6b7681] text-left">
                             {request.email}
+                          </TableCell>
+                          <TableCell className="text-[13px] text-text-main text-left">
+                            {request?.item_name || "Unknown"}
                           </TableCell>
                           <TableCell className="text-[13px] text-[#888] text-left">
                             {new Date(request.created_at).toLocaleDateString()}
