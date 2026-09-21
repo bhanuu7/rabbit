@@ -1073,12 +1073,6 @@ function TrendingCard({ product }) {
 
         {/* Always stays at the bottom */}
         <div
-          className="mt-auto align-left"
-          style={{ border: "2px solid blue" }}
-        >
-          abv
-        </div>
-        <div
           className="
           mt-auto flex min-h-10
           items-center justify-between gap-2
