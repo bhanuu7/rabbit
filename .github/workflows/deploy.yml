@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: production
 
     steps:
       # 1. Get the latest code
@@ -27,6 +28,14 @@ jobs:
 
       # 4. Build React application
       - name: Build application
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+          VITE_COGNITO_USER_POOL_ID: ${{ vars.VITE_COGNITO_USER_POOL_ID }}
+          VITE_COGNITO_CLIENT_ID: ${{ vars.VITE_COGNITO_CLIENT_ID }}
+          VITE_COGNITO_REGION: ${{ vars.VITE_COGNITO_REGION }}
+          VITE_IDENTITY_POOL_ID: ${{ vars.VITE_IDENTITY_POOL_ID }}
+          VITE_ASSETS_BUCKET: ${{ vars.VITE_ASSETS_BUCKET }}
+          VITE_REGION: ${{ vars.VITE_REGION }}
         run: npm run build
 
       # 5. Configure AWS
